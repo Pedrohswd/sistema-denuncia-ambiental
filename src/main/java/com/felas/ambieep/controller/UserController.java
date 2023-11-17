@@ -26,6 +26,7 @@ public class UserController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
 
+
     }
 
     @GetMapping("/{id}")
@@ -50,6 +51,7 @@ public class UserController {
     public ResponseEntity<User> atualizarUsuario(@RequestBody UpdateUserRecordJSON userRecordJSON) {
         User userUpdated = userService.atualizarUsuario(userRecordJSON);
         return ResponseEntity.ok(userUpdated);
+
     }
 
     @DeleteMapping("/delete/{id}")

@@ -15,7 +15,6 @@ import java.util.List;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
-
     public User cadastrarUsuario(NewUserRecordJSON userJSON) {
         User user = new User();
         user.setCpf(CPF.retirarMascara(userJSON.cpf()));
