@@ -12,7 +12,8 @@ public class User {
     private Long id;
     private String cpf;
     private String password;
-    private String nome;
+    private String name;
+    private String phone;
     @Enumerated(EnumType.STRING)
     private Permission permission;
 
@@ -20,11 +21,12 @@ public class User {
 
     }
 
-    public User(Long id, String cpf, String password, String nome, Permission permission) {
+    public User(Long id, String cpf, String password, String name, String phone,Permission permission) {
         this.id = id;
         this.cpf = cpf;
         this.password = password;
-        this.nome = nome;
+        this.name = name;
+        this.phone = phone;
         this.permission = permission;
     }
 
@@ -52,12 +54,21 @@ public class User {
         this.password = senha;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+
     }
 
     public Permission getPermission() {

@@ -1,7 +1,10 @@
 package com.felas.ambieep.controller;
 
 import com.felas.ambieep.entites.User;
+import com.felas.ambieep.entites.records.NewUserRecordJSON;
+import com.felas.ambieep.entites.records.UpdateUserRecordJSON;
 import com.felas.ambieep.services.UserService;
+import com.felas.ambieep.utils.CPF;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +19,12 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/register")
-    public ResponseEntity<User> cadastrarUsuario(@RequestBody User usuario) {
-        User novoUsuario = userService.cadastrarUsuario(usuario);
-        return new ResponseEntity<>(novoUsuario, HttpStatus.CREATED);
+    public ResponseEntity<User> cadastrarUsuario(@RequestBody NewUserRecordJSON user) {
+        if (CPF.validarCPF(CPF.retirarMascara(user.cpf()))){
+            User newUser = userService.cadastrarUsuario(user);
+            return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     }
 
     @GetMapping("/{id}")
@@ -40,9 +46,9 @@ public class UserController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<User> atualizarUsuario(@RequestBody User usuario) {
-        User usuarioAtualizado = userService.atualizarUsuario(usuario);
-        return ResponseEntity.ok(usuarioAtualizado);
+    public ResponseEntity<User> atualizarUsuario(@RequestBody UpdateUserRecordJSON userRecordJSON) {
+        User userUpdated = userService.atualizarUsuario(userRecordJSON);
+        return ResponseEntity.ok(userUpdated);
     }
 
     @DeleteMapping("/delete/{id}")
