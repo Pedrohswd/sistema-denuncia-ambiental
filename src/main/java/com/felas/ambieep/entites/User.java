@@ -13,7 +13,6 @@ public class User {
     private String cpf;
     private String password;
     private String name;
-
     private String phone;
     @Enumerated(EnumType.STRING)
     private Permission permission;
@@ -69,6 +68,7 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+
     }
 
     public Permission getPermission() {
