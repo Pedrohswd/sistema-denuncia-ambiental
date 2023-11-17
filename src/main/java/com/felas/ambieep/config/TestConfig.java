@@ -16,9 +16,9 @@ public class TestConfig implements CommandLineRunner {
     private UserRepository userRepository;
     @Override
     public void run(String... args) throws Exception {
-        User u1 = new User(1L, "04019822212", "12345", "Pedro Henrique", Permission.ANALISTA);
-        User u2 = new User(2L, "0401242213", "12345", "Emilly Duarte", Permission.DENUNCIANTE);
-        User u3 = new User(3L, "2301242213", "12345", "Eduardo Candido", Permission.DENUNCIANTE);
+        User u1 = new User(1L, "04019822212", "12345", "Pedro Henrique", "2312131",Permission.ANALISTA);
+        User u2 = new User(2L, "0401242213", "12345", "Emilly Duarte","234412", Permission.DENUNCIANTE);
+        User u3 = new User(3L, "2301242213", "12345", "Eduardo Candido", "2312112",Permission.DENUNCIANTE);
         userRepository.saveAll(Arrays.asList(u1,u2,u3));
 
     }
