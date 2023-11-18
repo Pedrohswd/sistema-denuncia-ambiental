@@ -1,6 +1,6 @@
 package com.felas.ambieep.entites.records;
 
-import com.felas.ambieep.enumeration.Permission;
+import com.felas.ambieep.entites.enums.Permission;
 
 public record NewUserRecordJSON(String cpf,
                                 String password,

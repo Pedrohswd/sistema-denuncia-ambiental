@@ -7,6 +7,7 @@ import com.felas.ambieep.repositories.UserRepository;
 import com.felas.ambieep.utils.CPF;
 import com.felas.ambieep.utils.CriptoHash;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,7 +16,6 @@ import java.util.List;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
-
     public User cadastrarUsuario(NewUserRecordJSON userJSON) {
         User user = new User();
         user.setCpf(CPF.retirarMascara(userJSON.cpf()));

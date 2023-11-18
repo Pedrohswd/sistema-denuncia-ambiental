@@ -6,6 +6,7 @@ import com.felas.ambieep.entites.records.UpdateUserRecordJSON;
 import com.felas.ambieep.services.UserService;
 import com.felas.ambieep.utils.CPF;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -49,6 +50,7 @@ public class UserController {
     public ResponseEntity<User> atualizarUsuario(@RequestBody UpdateUserRecordJSON userRecordJSON) {
         User userUpdated = userService.atualizarUsuario(userRecordJSON);
         return ResponseEntity.ok(userUpdated);
+
     }
 
     @DeleteMapping("/delete/{id}")
@@ -56,5 +58,6 @@ public class UserController {
         userService.excluirUsuario(id);
         return ResponseEntity.noContent().build();
     }
+
 
 }

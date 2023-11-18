@@ -1,6 +1,6 @@
 package com.felas.ambieep.entites;
 
-import com.felas.ambieep.enumeration.Permission;
+import com.felas.ambieep.entites.enums.Permission;
 import jakarta.persistence.*;
 
 
