@@ -5,7 +5,6 @@ import com.felas.ambieep.entites.records.NewUserRecordJSON;
 import com.felas.ambieep.entites.records.UpdateUserRecordJSON;
 import com.felas.ambieep.repositories.UserRepository;
 import com.felas.ambieep.utils.CPF;
-import org.modelmapper.ModelMapper;
 import com.felas.ambieep.utils.CriptoHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
