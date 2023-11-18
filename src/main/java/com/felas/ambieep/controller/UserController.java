@@ -26,8 +26,6 @@ public class UserController {
             return new ResponseEntity<>(newUser, HttpStatus.CREATED);
         }
         return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
-
-
     }
 
     @GetMapping("/{id}")
