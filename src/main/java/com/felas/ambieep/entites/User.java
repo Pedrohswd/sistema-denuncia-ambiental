@@ -10,9 +10,11 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique=true)
     private String cpf;
     private String password;
     private String name;
+    @Column(unique=true)
     private String phone;
     @Enumerated(EnumType.STRING)
     private Permission permission;

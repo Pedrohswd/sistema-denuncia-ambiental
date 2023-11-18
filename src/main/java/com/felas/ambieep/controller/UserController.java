@@ -6,12 +6,9 @@ import com.felas.ambieep.entites.records.UpdateUserRecordJSON;
 import com.felas.ambieep.services.UserService;
 import com.felas.ambieep.utils.CPF;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
@@ -30,20 +27,14 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<User> buscarUsuarioPorId(@PathVariable Long id) {
-        User usuario = userService.buscarUsuarioPorId(id);
-        return usuario != null ? ResponseEntity.ok(usuario) : ResponseEntity.notFound().build();
+        User user = userService.buscarUsuarioPorId(id);
+        return user != null ? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
     }
 
     @GetMapping("/cpf/{cpf}")
     public ResponseEntity<User> buscarUsuarioPorCpf(@PathVariable String cpf) {
         User usuario = userService.buscarUsuarioPorCpf(cpf);
         return usuario != null ? ResponseEntity.ok(usuario) : ResponseEntity.notFound().build();
-    }
-
-    @GetMapping("/list")
-    public ResponseEntity<List<User>> listarUsuarios() {
-        List<User> usuarios = userService.listarUsuarios();
-        return ResponseEntity.ok(usuarios);
     }
 
     @PutMapping("/update")
