@@ -28,7 +28,9 @@ public class UserService {
 
     public User buscarUsuarioPorId(Long id) {
         User user = userRepository.findById(id).orElse(null);
-        user.setPassword("");
+        if (user != null) {
+            user.setPassword("");
+        }
         return user;
     }
 
