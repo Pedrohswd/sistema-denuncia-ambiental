@@ -1,7 +1,7 @@
 package com.felas.ambieep.config;
 
 import com.felas.ambieep.entites.User;
-import com.felas.ambieep.enumeration.Permission;
+import com.felas.ambieep.entites.enums.Permission;
 import com.felas.ambieep.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

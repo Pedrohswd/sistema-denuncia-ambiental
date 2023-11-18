@@ -1,4 +1,4 @@
-package com.felas.ambieep.enumeration;
+package com.felas.ambieep.entites.enums;
 
 public enum Permission {
     DENUNCIANTE,
