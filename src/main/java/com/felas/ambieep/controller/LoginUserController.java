@@ -1,5 +1,6 @@
 package com.felas.ambieep.controller;
 
+import com.felas.ambieep.entites.LoginUser;
 import com.felas.ambieep.entites.User;
 import com.felas.ambieep.entites.records.LoginJSON;
 import com.felas.ambieep.services.LoginUserService;
@@ -15,9 +16,17 @@ public class LoginUserController {
     @Autowired
     private LoginUserService loginUserService;
 
-    @GetMapping
-    public boolean loginUser(LoginJSON loginJSON){
+    @PostMapping
+    public boolean loginUser(@RequestBody LoginJSON loginJSON){
         if(loginUserService.logonUser(loginJSON)){
+            return true;
+        }
+        return false;
+    }
+
+    @PostMapping("/logoff")
+    public boolean logoff(@RequestBody LoginJSON loginJSON){
+        if(loginUserService.logoffUser(loginJSON)){
             return true;
         }
         return false;
