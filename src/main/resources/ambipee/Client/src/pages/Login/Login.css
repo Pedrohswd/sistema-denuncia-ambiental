@@ -1,0 +1,142 @@
+body,
+#root {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+#loginFormContainer input:-webkit-autofill,
+#loginFormContainer input:-webkit-autofill:hover,
+#loginFormContainer input:-webkit-autofill:focus,
+#loginFormContainer textarea:-webkit-autofill,
+#loginFormContainer textarea:-webkit-autofill:hover,
+#loginFormContainer textarea:-webkit-autofill:focus,
+#loginFormContainer select:-webkit-autofill,
+#loginFormContainer select:-webkit-autofill:hover,
+#loginFormContainer select:-webkit-autofill:focus {
+    -webkit-text-fill-color: white;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+#loginMain {
+    height: 100%;
+    background: linear-gradient(180deg, rgba(2, 0, 36, 1) 0%, rgba(37, 97, 207, 1) 0%, rgba(0, 212, 255, 1) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#login_logo {
+    position: relative;
+    left: 33%;
+    top: 20%;
+    width: 500px;
+}
+
+.show_pwd_login {
+    background-size: cover;
+    border: none;
+    width: 30px;
+    height: 24px;
+    background-color: inherit;
+}
+
+#loginFormContainer {
+    width: 280px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+
+#icon_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#icon_container input[type='text'] {
+    font-family: 'Montserrat';
+    font-weight: bold;
+}
+
+#user_icon_img {
+    height: 16px;
+    width: 16px;
+}
+
+#lock_icon_img {
+    height: 16px;
+    width: 16px;
+}
+
+#textbox {
+    width: 100%;
+    overflow: hidden;
+    font-size: 15px;
+    padding: 8px 0;
+    margin: 8px 0;
+}
+
+#textbox input {
+    font-family: 'Urbane';
+    color: white;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    background: none;
+    border-bottom: 1px solid white;
+}
+
+.btn_entrar {
+    font-family: 'Urbane';
+    width: 100%;
+    border: none;
+    padding: 0;
+    height: 30px;
+    color: white;
+    font-size: 15px;
+    border-radius: 20px;
+    background-color: #f4a333;
+    cursor: pointer;
+}
+
+.btn_entrar:hover {
+    color: rgb(193, 192, 192);
+    background-color: #b27826;
+}
+
+#loginFooter {
+    display: flex;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    justify-content: center;
+    font-size: 10px;
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#loginFooter a {
+    color: lightgray;
+    text-decoration: none;
+    margin-left: 25px;
+    margin-right: 10px;
+}
+
+#loginFooter a:hover {
+    color: gray;
+}
+
+@media only screen and (max-width: 450px) {
+    #login_logo {
+        position: relative;
+        left: 10%;
+        top: 30%;
+        width: 300px;
+    }
+}
