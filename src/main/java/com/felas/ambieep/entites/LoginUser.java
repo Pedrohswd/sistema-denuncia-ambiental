@@ -10,9 +10,9 @@ public class LoginUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String cpf;
-    @Column(name = "date_login")
+    @Column(name = "date_login", nullable = false)
     private Date dateLogin;
 
     public LoginUser() {
