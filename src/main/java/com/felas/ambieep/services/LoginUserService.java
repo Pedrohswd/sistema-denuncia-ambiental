@@ -42,4 +42,12 @@ public class LoginUserService {
         }
         return false;
     }
+
+    public boolean loginCheck(LoginJSON loginJSON){
+        User user = userRepository.findByCpf(CPF.retirarMascara(loginJSON.cpf()));
+        if(loginUserRepository.findByCpf(user.getCpf()) != null){
+            return true;
+        }
+        return false;
+    }
 }

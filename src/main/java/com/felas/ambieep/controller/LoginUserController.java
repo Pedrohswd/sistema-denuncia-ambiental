@@ -1,13 +1,10 @@
 package com.felas.ambieep.controller;
 
-import com.felas.ambieep.entites.LoginUser;
-import com.felas.ambieep.entites.User;
+
 import com.felas.ambieep.entites.records.LoginJSON;
 import com.felas.ambieep.services.LoginUserService;
-import com.felas.ambieep.services.UserService;
+import com.felas.ambieep.utils.CPF;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,8 +14,16 @@ public class LoginUserController {
     private LoginUserService loginUserService;
 
     @PostMapping
-    public boolean loginUser(@RequestBody LoginJSON loginJSON){
+    public String loginUser(@RequestBody LoginJSON loginJSON){
         if(loginUserService.logonUser(loginJSON)){
+            return CPF.inserirMascara(loginJSON.cpf());
+        }
+        return "User not found";
+    }
+
+    @PostMapping("/autenticate")
+    public boolean loginCheck(@RequestBody LoginJSON loginJSON){
+        if(loginUserService.loginCheck(loginJSON)){
             return true;
         }
         return false;
