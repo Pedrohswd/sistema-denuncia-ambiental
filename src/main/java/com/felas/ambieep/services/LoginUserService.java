@@ -37,7 +37,7 @@ public class LoginUserService {
     public boolean logoffUser(LoginJSON loginJSON){
         User user = userRepository.findByCpf(CPF.retirarMascara(loginJSON.cpf()));
         if(loginUserRepository.findByCpf(user.getCpf()) != null){
-            loginUserRepository.deleteById(user.getId());
+            loginUserRepository.deleteById(loginUserRepository.findByCpf(user.getCpf()).getId());
             return true;
         }
         return false;
