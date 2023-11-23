@@ -3,6 +3,8 @@ package com.felas.ambieep.entites;
 import com.felas.ambieep.entites.enums.CategoryType;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "category")
 public class Category {
@@ -13,6 +15,8 @@ public class Category {
     private String description;
     @Enumerated(EnumType.STRING)
     private CategoryType categoryType;
+    @OneToMany(mappedBy = "category")
+    private List<Denunciation> denunciations;
 
     public Category(){
 

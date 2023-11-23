@@ -4,6 +4,8 @@ import com.felas.ambieep.entites.enums.State;
 import com.felas.ambieep.entites.records.CountyJSON;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "contries")
 public class County {
@@ -16,6 +18,8 @@ public class County {
     private Long idIBGE;
     @Enumerated(EnumType.STRING)
     private State state;
+    @OneToMany(mappedBy = "county")
+    private List<Address> address;
 
     public County() {
 
