@@ -3,9 +3,10 @@ import { useState } from 'react';
 import Axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { AiOutlineEyeInvisible } from 'react-icons/ai';
-import NavBar from '../../components/Navbar/NavBar';
+import NavBar from '../../components/NavBar/NavBar';
 
 function RegisterUser() {
+ 
     const [passwordShown, setPasswordShown] = useState(false);
     const [user, setUser] = useState({
         name: "",
@@ -41,7 +42,6 @@ function RegisterUser() {
             navigate('/login');
         })
     };
-
 
 
     return (
