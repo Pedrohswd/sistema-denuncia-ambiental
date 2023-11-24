@@ -18,8 +18,6 @@ public class County {
     private Long idIBGE;
     @Enumerated(EnumType.STRING)
     private State state;
-    @OneToMany(mappedBy = "county")
-    private List<Address> address;
 
     public County() {
 

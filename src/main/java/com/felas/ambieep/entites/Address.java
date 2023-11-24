@@ -1,6 +1,8 @@
 package com.felas.ambieep.entites;
 
 import com.felas.ambieep.entites.enums.State;
+import com.felas.ambieep.entites.records.AddressJSON;
+import com.felas.ambieep.entites.records.DenunciationJSON;
 import jakarta.persistence.*;
 
 @Entity
@@ -12,23 +14,31 @@ public class Address {
     private String street;
     private String neighborhood;
     private State state;
-    @ManyToOne
-    @JoinColumn(name= "county_id", referencedColumnName = "id")
-    private County county;
+    private String county;
     private String zipCode;
     private String pointReference;
-    @OneToOne
-    @JoinColumn(name = "geographic_id", referencedColumnName = "id")
-    private Geographic geographic;
-    @OneToOne(cascade = CascadeType.ALL)
+    private double latitude;
+    private double logitude;
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "denunciation_id", referencedColumnName = "id")
     private Denunciation denunciation;
 
-    public Address(){
+    public Address() {
 
     }
 
-    public Address(Long id, String street, String neighborhood, State state, County county, String zipCode, String pointReference, Geographic geographic) {
+    public Address(AddressJSON addressJSON) {
+        this.street = addressJSON.street();
+        this.neighborhood = addressJSON.neighborhood();
+        this.state = addressJSON.state();
+        this.county = addressJSON.county();
+        this.zipCode = addressJSON.zipCode();
+        this.pointReference = addressJSON.pointReference();
+        this.latitude = addressJSON.latitude();
+        this.logitude = addressJSON.longitude();
+    }
+
+    public Address(Long id, String street, String neighborhood, State state, String county, String zipCode, String pointReference, double latitude, double logitude) {
         this.id = id;
         this.street = street;
         this.neighborhood = neighborhood;
@@ -36,7 +46,17 @@ public class Address {
         this.county = county;
         this.zipCode = zipCode;
         this.pointReference = pointReference;
-        this.geographic = geographic;
+    }
+
+    public Address(Address address) {
+        this.street = address.getStreet();
+        this.neighborhood = address.getNeighborhood();
+        this.state = address.getState();
+        this.county = address.getCounty();
+        this.zipCode = address.getZipCode();
+        this.pointReference = address.getPointReference();
+        this.latitude = address.getLatitude();
+        this.logitude = address.getLogitude();
     }
 
     public Long getId() {
@@ -71,11 +91,11 @@ public class Address {
         this.state = state;
     }
 
-    public County getCounty() {
+    public String getCounty() {
         return county;
     }
 
-    public void setCounty(County county) {
+    public void setCounty(String county) {
         this.county = county;
     }
 
@@ -95,11 +115,19 @@ public class Address {
         this.pointReference = pointReference;
     }
 
-    public Geographic getGeographic() {
-        return geographic;
+    public double getLatitude() {
+        return latitude;
     }
 
-    public void setGeographic(Geographic geographic) {
-        this.geographic = geographic;
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLogitude() {
+        return logitude;
+    }
+
+    public void setLogitude(double logitude) {
+        this.logitude = logitude;
     }
 }
