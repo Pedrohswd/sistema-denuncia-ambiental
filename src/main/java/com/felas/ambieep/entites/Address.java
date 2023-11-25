@@ -19,9 +19,7 @@ public class Address {
     private String pointReference;
     private double latitude;
     private double logitude;
-    @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "denunciation_id", referencedColumnName = "id")
-    private Denunciation denunciation;
+
 
     public Address() {
 

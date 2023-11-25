@@ -1,6 +1,9 @@
 package com.felas.ambieep.entites;
 
+import com.felas.ambieep.entites.records.PhotosJSON;
 import jakarta.persistence.*;
+
+import java.util.Base64;
 
 @Entity
 @Table(name = "photos")
@@ -10,6 +13,7 @@ public class Photos {
     private long id;
     @Lob
     private byte[] photo;
+
     @ManyToOne
     @JoinColumn(name = "denunciation_id")
     private Denunciation denunciation;
@@ -18,11 +22,12 @@ public class Photos {
 
     }
 
-    public Photos(long id, byte[] photo, Denunciation denunciation) {
-        this.id = id;
-        this.photo = photo;
+    public Photos(String photos, Denunciation denunciation) {
+        this.photo = Base64.getDecoder().decode(photos);
         this.denunciation = denunciation;
+
     }
+
 
     public long getId() {
         return id;
@@ -47,4 +52,5 @@ public class Photos {
     public void setDenunciation(Denunciation denunciation) {
         this.denunciation = denunciation;
     }
+
 }

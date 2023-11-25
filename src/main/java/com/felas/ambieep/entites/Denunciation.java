@@ -14,7 +14,7 @@ public class Denunciation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Column(unique = true)
     private String nProtocol;
     @OneToMany(mappedBy = "denunciation", cascade = CascadeType.ALL)
     private List<Photos> photos;
@@ -42,11 +42,13 @@ public class Denunciation {
     public Denunciation(DenunciationJSON denunciationJSON) {
         this.nProtocol = denunciationJSON.nProtocol();
         this.user = denunciationJSON.user();
+        this.photos = denunciationJSON.photos();
         this.description = denunciationJSON.description();
         this.category = denunciationJSON.category();
         this.dateFact = denunciationJSON.dateFact();
         this.dateCreated = Dates.now();
         this.author = denunciationJSON.author();
+        this.address = denunciationJSON.address();
         this.situation = denunciationJSON.situation();
     }
 
@@ -56,6 +58,14 @@ public class Denunciation {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getnProtocol() {
+        return nProtocol;
+    }
+
+    public void setnProtocol(String nProtocol) {
+        this.nProtocol = nProtocol;
     }
 
     public List<Photos> getPhotos() {
