@@ -1,8 +1,10 @@
 package com.felas.ambieep.entites;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.felas.ambieep.entites.enums.CategoryType;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity

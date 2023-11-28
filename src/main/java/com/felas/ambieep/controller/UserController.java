@@ -1,8 +1,8 @@
 package com.felas.ambieep.controller;
 
 import com.felas.ambieep.entites.User;
-import com.felas.ambieep.entites.records.NewUserRecordJSON;
-import com.felas.ambieep.entites.records.UpdateUserRecordJSON;
+import com.felas.ambieep.entites.records.user.NewUserRecordJSON;
+import com.felas.ambieep.entites.records.user.UpdateUserRecordJSON;
 import com.felas.ambieep.services.UserService;
 import com.felas.ambieep.utils.CPF;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,10 +1,11 @@
 package com.felas.ambieep.entites;
 
 import com.felas.ambieep.entites.enums.Situation;
-import com.felas.ambieep.entites.records.DenunciationJSON;
+import com.felas.ambieep.entites.records.denunciation.DenunciationPOSTJSON;
 import com.felas.ambieep.utils.Dates;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,8 +18,9 @@ public class Denunciation {
     @Column(unique = true)
     private String nProtocol;
     @OneToMany(mappedBy = "denunciation", cascade = CascadeType.ALL)
-    private List<Photos> photos;
+    private List<Photos> photos = new ArrayList<>();
     @ManyToOne
+    @Column(name = "reporting_user")
     @JoinColumn(name = "users_id")
     private User user;
     @OneToOne(cascade = CascadeType.PERSIST)
@@ -31,6 +33,10 @@ public class Denunciation {
     @Column(nullable = false)
     private Date dateFact;
     private Date dateCreated;
+    private String technicalReport;
+    @ManyToOne
+    @JoinColumn(name = "users_id")
+    private User analystUser;
     @Column(nullable = false)
     private String author;
     @Enumerated(EnumType.STRING)
@@ -39,14 +45,15 @@ public class Denunciation {
     public Denunciation(){
     }
 
-    public Denunciation(DenunciationJSON denunciationJSON) {
+    public Denunciation(DenunciationPOSTJSON denunciationJSON) {
         this.nProtocol = denunciationJSON.nProtocol();
         this.user = denunciationJSON.user();
-        this.photos = denunciationJSON.photos();
         this.description = denunciationJSON.description();
         this.category = denunciationJSON.category();
         this.dateFact = denunciationJSON.dateFact();
         this.dateCreated = Dates.now();
+        this.technicalReport = denunciationJSON.technicalReport();
+        this.analystUser = denunciationJSON.analystUser();
         this.author = denunciationJSON.author();
         this.address = denunciationJSON.address();
         this.situation = denunciationJSON.situation();
@@ -122,6 +129,22 @@ public class Denunciation {
 
     public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
+    }
+
+    public String getTechnicalReport() {
+        return technicalReport;
+    }
+
+    public void setTechnicalReport(String technicalReport) {
+        this.technicalReport = technicalReport;
+    }
+
+    public User getAnalystUser() {
+        return analystUser;
+    }
+
+    public void setAnalystUser(User analystUser) {
+        this.analystUser = analystUser;
     }
 
     public String getAuthor() {

@@ -1,20 +1,20 @@
-package com.felas.ambieep.entites.records;
+package com.felas.ambieep.entites.records.denunciation;
 
 import com.felas.ambieep.entites.*;
-import com.felas.ambieep.entites.enums.CategoryType;
 import com.felas.ambieep.entites.enums.Situation;
-import com.felas.ambieep.entites.enums.State;
 
 import java.util.Date;
 import java.util.List;
 
-public record DenunciationJSON(
+public record DenunciationPOSTJSON(
         String nProtocol,
         User user,
-        List<Photos> photos,
+        List<String> photos,
         Category category,
         String description,
         Date dateFact,
+        String technicalReport,
+        User analystUser,
         String author,
         Situation situation,
         Address address) {

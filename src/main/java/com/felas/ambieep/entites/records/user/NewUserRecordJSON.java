@@ -1,4 +1,4 @@
-package com.felas.ambieep.entites.records;
+package com.felas.ambieep.entites.records.user;
 
 import com.felas.ambieep.entites.enums.Permission;
 

@@ -8,6 +8,8 @@ import com.felas.ambieep.repositories.PhotosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PhotosService {
     @Autowired
@@ -16,12 +18,10 @@ public class PhotosService {
     @Autowired
     private DenunciationRepository denunciationRepository;
 
-    public String insertImg(PhotosJSON photosJSON){
+    public String insertImg(PhotosJSON photosJSON) {
         Denunciation denunciation = denunciationRepository.findByNProtocol(photosJSON.nProtocol());
-        for(String photo: photosJSON.imgBase64()){
-            Photos photos = new Photos(photo, denunciation);
-        }
+        Photos photos = new Photos(photosJSON.imgBase64(), denunciation);
+        photosRepository.save(photos);
         return "Created img";
     }
-
 }

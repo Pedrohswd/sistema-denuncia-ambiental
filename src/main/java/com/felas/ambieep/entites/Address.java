@@ -2,7 +2,6 @@ package com.felas.ambieep.entites;
 
 import com.felas.ambieep.entites.enums.State;
 import com.felas.ambieep.entites.records.AddressJSON;
-import com.felas.ambieep.entites.records.DenunciationJSON;
 import jakarta.persistence.*;
 
 @Entity
@@ -18,7 +17,7 @@ public class Address {
     private String zipCode;
     private String pointReference;
     private double latitude;
-    private double logitude;
+    private double longitude;
 
 
     public Address() {
@@ -33,10 +32,10 @@ public class Address {
         this.zipCode = addressJSON.zipCode();
         this.pointReference = addressJSON.pointReference();
         this.latitude = addressJSON.latitude();
-        this.logitude = addressJSON.longitude();
+        this.longitude = addressJSON.longitude();
     }
 
-    public Address(Long id, String street, String neighborhood, State state, String county, String zipCode, String pointReference, double latitude, double logitude) {
+    public Address(Long id, String street, String neighborhood, State state, String county, String zipCode, String pointReference, double latitude, double longitude) {
         this.id = id;
         this.street = street;
         this.neighborhood = neighborhood;
@@ -54,7 +53,7 @@ public class Address {
         this.zipCode = address.getZipCode();
         this.pointReference = address.getPointReference();
         this.latitude = address.getLatitude();
-        this.logitude = address.getLogitude();
+        this.longitude = address.getLongitude();
     }
 
     public Long getId() {
@@ -121,11 +120,11 @@ public class Address {
         this.latitude = latitude;
     }
 
-    public double getLogitude() {
-        return logitude;
+    public double getLongitude() {
+        return longitude;
     }
 
-    public void setLogitude(double logitude) {
-        this.logitude = logitude;
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 }
