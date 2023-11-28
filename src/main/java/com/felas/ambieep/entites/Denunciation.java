@@ -20,7 +20,6 @@ public class Denunciation {
     @OneToMany(mappedBy = "denunciation", cascade = CascadeType.ALL)
     private List<Photos> photos = new ArrayList<>();
     @ManyToOne
-    @Column(name = "reporting_user")
     @JoinColumn(name = "users_id")
     private User user;
     @OneToOne(cascade = CascadeType.PERSIST)
@@ -33,16 +32,15 @@ public class Denunciation {
     @Column(nullable = false)
     private Date dateFact;
     private Date dateCreated;
-    private String technicalReport;
-    @ManyToOne
-    @JoinColumn(name = "users_id")
-    private User analystUser;
     @Column(nullable = false)
     private String author;
     @Enumerated(EnumType.STRING)
     private Situation situation;
+    @OneToOne
+    @JoinColumn(name = "techinical_id", referencedColumnName = "id")
+    private TechnicalRegister technicalRegister;
 
-    public Denunciation(){
+    public Denunciation() {
     }
 
     public Denunciation(DenunciationPOSTJSON denunciationJSON) {
@@ -52,8 +50,6 @@ public class Denunciation {
         this.category = denunciationJSON.category();
         this.dateFact = denunciationJSON.dateFact();
         this.dateCreated = Dates.now();
-        this.technicalReport = denunciationJSON.technicalReport();
-        this.analystUser = denunciationJSON.analystUser();
         this.author = denunciationJSON.author();
         this.address = denunciationJSON.address();
         this.situation = denunciationJSON.situation();
@@ -131,22 +127,6 @@ public class Denunciation {
         this.dateCreated = dateCreated;
     }
 
-    public String getTechnicalReport() {
-        return technicalReport;
-    }
-
-    public void setTechnicalReport(String technicalReport) {
-        this.technicalReport = technicalReport;
-    }
-
-    public User getAnalystUser() {
-        return analystUser;
-    }
-
-    public void setAnalystUser(User analystUser) {
-        this.analystUser = analystUser;
-    }
-
     public String getAuthor() {
         return author;
     }
@@ -161,5 +141,13 @@ public class Denunciation {
 
     public void setSituation(Situation situation) {
         this.situation = situation;
+    }
+
+    public TechnicalRegister getTechnicalRegister() {
+        return technicalRegister;
+    }
+
+    public void setTechnicalRegister(TechnicalRegister technicalRegister) {
+        this.technicalRegister = technicalRegister;
     }
 }

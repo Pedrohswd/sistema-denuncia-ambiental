@@ -13,8 +13,6 @@ public record DenunciationPOSTJSON(
         Category category,
         String description,
         Date dateFact,
-        String technicalReport,
-        User analystUser,
         String author,
         Situation situation,
         Address address) {
