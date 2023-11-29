@@ -8,6 +8,7 @@ import com.felas.ambieep.entites.records.denunciation.DenunciationPOSTJSON;
 import com.felas.ambieep.entites.records.denunciation.DenunciationPUTConcludeJSON;
 import com.felas.ambieep.entites.records.denunciation.DenunciationPUTProgJOSN;
 import com.felas.ambieep.repositories.*;
+import com.felas.ambieep.utils.Dates;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +36,7 @@ public class DenunciationService {
     public String createDenun(DenunciationPOSTJSON denunciationJSON) {
         Denunciation denunciation = new Denunciation(denunciationJSON);
         denunciation = denunciationRepository.save(denunciation);
-        denunciation.setnProtocol(denunciation.getId() + "/23");
+        denunciation.setnProtocol(denunciation.getId() + "/" + Dates.year());
         denunciationRepository.save(denunciation);
         return "Created protocol " + denunciation.getnProtocol();
     }
