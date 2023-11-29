@@ -58,7 +58,6 @@ function RegisterUser() {
                     <select>
                         <option>DENUNCIANTE</option>
                         <option>ANALISTA</option>
-                        <option>DENUNCIANTE_ANONIMO</option>
                     </select>
                     <input type={passwordShown ? 'text' : 'password'} name="password" placeholder="Senha" value={user.password} onChange={handleInput} required />
                     <div className='show_pwd_add' onClick={togglePasswordVisiblity}>

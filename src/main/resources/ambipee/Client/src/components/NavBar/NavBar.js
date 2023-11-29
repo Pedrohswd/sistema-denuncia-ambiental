@@ -1,9 +1,11 @@
 
 import './NavBar.css';
 import { useNavigate } from 'react-router-dom';
-import { FaNewspaper, FaSignOutAlt, FaCalendarAlt, FaUserPlus } from 'react-icons/fa';
+import { FaNewspaper, FaSignOutAlt, FaUserPlus} from 'react-icons/fa';
 import { NavLink } from "react-router-dom";
-import { TbBrandGoogleAnalytics, TbReportMoney } from 'react-icons/tb';
+import { BsFillMegaphoneFill } from "react-icons/bs";
+import { FaHouse } from "react-icons/fa6";
+import { TbReportMoney } from 'react-icons/tb';
 
 function NavBar() {
     const navigate = useNavigate();
@@ -17,12 +19,16 @@ function NavBar() {
         <div className='header'>
             <nav>
                 <div className='links nav-top'>
+                    <NavLink to='/' className='nav-link'>
+                        <FaHouse color='white' />
+                        <span className='span'>Home</span>
+                    </NavLink>
                     <NavLink to='/denuncias' className='nav-link'>
-                        <TbBrandGoogleAnalytics color='white' />
+                        <BsFillMegaphoneFill color='white' />
                         <span className='span'>Denúncias</span>
                     </NavLink>
-                    <NavLink to="/calendar" className="nav-link">
-                        <FaCalendarAlt color='white' />
+                    <NavLink to="/register/user" className="nav-link">
+                        <FaUserPlus color='white' />
                         <span className='span'>Cadastrar usuário </span>
                     </NavLink>
                     {/* Condição para esconder a opção do menu lateral */}
