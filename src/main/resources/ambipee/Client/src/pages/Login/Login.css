@@ -3,6 +3,7 @@ body,
     width: 100%;
     height: 100%;
     margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 #loginFormContainer input:-webkit-autofill,
@@ -14,84 +15,91 @@ body,
 #loginFormContainer select:-webkit-autofill,
 #loginFormContainer select:-webkit-autofill:hover,
 #loginFormContainer select:-webkit-autofill:focus {
-    -webkit-text-fill-color: white;
+    -webkit-text-fill-color: black;
     transition: background-color 5000s ease-in-out 0s;
 }
 
-#loginMain {
-    height: 100%;
-    background: linear-gradient(180deg, rgba(2, 0, 36, 1) 0%, rgba(37, 97, 207, 1) 0%, rgba(0, 212, 255, 1) 100%);
+.loginMain {
+    height: 100vh;
+    background: #f2f2f2;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-#login_logo {
-    position: relative;
-    left: 33%;
-    top: 20%;
-    width: 500px;
-}
-
-.show_pwd_login {
-    background-size: cover;
-    border: none;
-    width: 30px;
-    height: 24px;
-    background-color: inherit;
-}
-
-#loginFormContainer {
-    width: 280px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-}
-
-#icon_container {
+.loginFormContainer{
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
+    width: 350px;
+    height: 400px;
+    box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 25px;
+    background-color: rgba(64, 143, 61, 0.6);
+}
+.textbox{
+    margin: 10px 10px 10px 10px;
+    padding: 5px;
+}
+.textbox input{
+    background-color: white;
+    border:none;
+    border-radius: 25px;
+    height: 20px;
+}
+.loginFooter{
+    display: flex;
+    margin-top: 25px;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 300px;
+    height: auto;
 }
 
-#icon_container input[type='text'] {
-    font-family: 'Montserrat';
-    font-weight: bold;
-}
-
-#user_icon_img {
-    height: 16px;
-    width: 16px;
-}
-
-#lock_icon_img {
-    height: 16px;
-    width: 16px;
-}
-
-#textbox {
-    width: 100%;
-    overflow: hidden;
-    font-size: 15px;
-    padding: 8px 0;
-    margin: 8px 0;
-}
-
-#textbox input {
-    font-family: 'Urbane';
-    color: white;
-    width: 100%;
-    padding: 10px;
+.btn-c{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 100px;
     border: none;
-    outline: none;
-    background: none;
-    border-bottom: 1px solid white;
+    padding: 0;
+    margin-right: 5px;
+    height: 30px;
+    color: white;
+    font-size: 14px;
+    border-radius: 20px;
+    background-color: #1073c4;
+    box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
 }
+.btn-d{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 250px;
+    margin-left: 5px;
+    border: none;
+    padding: 0;
+    height: 30px;
+    color: white;
+    font-size: 14px;
+    border-radius: 20px;
+    background-color: #4d667a;
+    box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+.btn-c:hover {
+    color: rgb(193, 192, 192);
+    background-color: #0f4775;
+}
+.btn-d:hover {
+    color: rgb(193, 192, 192);
+    background-color: #31414e;
+}
+
+
+
 
 .btn_entrar {
-    font-family: 'Urbane';
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     width: 100%;
     border: none;
     padding: 0;
@@ -99,37 +107,14 @@ body,
     color: white;
     font-size: 15px;
     border-radius: 20px;
-    background-color: #f4a333;
+    background-color: #1073c4;
+    box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, 0.2);
     cursor: pointer;
 }
 
 .btn_entrar:hover {
     color: rgb(193, 192, 192);
-    background-color: #b27826;
-}
-
-#loginFooter {
-    display: flex;
-    width: 100%;
-    text-align: center;
-    cursor: pointer;
-    justify-content: center;
-    font-size: 10px;
-    position: absolute;
-    top: 65%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-#loginFooter a {
-    color: lightgray;
-    text-decoration: none;
-    margin-left: 25px;
-    margin-right: 10px;
-}
-
-#loginFooter a:hover {
-    color: gray;
+    background-color: #0f4775;
 }
 
 @media only screen and (max-width: 450px) {
