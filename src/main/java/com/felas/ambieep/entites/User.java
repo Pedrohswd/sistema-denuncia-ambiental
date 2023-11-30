@@ -11,6 +11,7 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_usr")
     private Long id;
     @Column(unique=true, nullable = false)
     private String cpf;

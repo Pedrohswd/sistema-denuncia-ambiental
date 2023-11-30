@@ -13,22 +13,28 @@ public interface DenunciationRepository extends JpaRepository<Denunciation, Long
     @Query(value = "SELECT * FROM Denunciation WHERE n_protocol = :protocol", nativeQuery = true)
     public Denunciation findByNProtocol(@Param("protocol") String nProtocol);
 
-    @Query("SELECT d FROM Denunciation d " +
-            "WHERE (:categoryType IS NULL OR d.category.categoryType = :categoryType) " +
-            "AND (:conty IS NULL OR d.address.county = :conty) " +
-            "AND (:state IS NULL OR d.address.state = :state) " +
-            "AND (:category IS NULL OR d.category =:category)"+
-            "AND (:cpf IS NULL OR d.user.cpf =:cpf)"+
-            "AND (:dateReg IS NULL OR d.dateCreated =:dateReg)"+
-            "AND (:dateFact IS NULL OR d.dateFact =:dateFact)"+
-            "AND (:situation IS NULL OR d.situation =:situation)")
-    public List<Denunciation> findyByParameters(@Param("categoryType") String categoria,
-                                                @Param("conty") String cidade,
-                                                @Param("state") String estado,
+    @Query(value = "SELECT * " +
+            "FROM denunciation d " +
+            "LEFT JOIN category c ON d.category_id = c.id_categ " +
+            "LEFT JOIN address a ON d.address_id = a.id_adr " +
+            "LEFT JOIN users u ON d.users_id = u.id_usr " +
+            "WHERE " +
+            "(:categoryType ISNULL OR CAST(c.category_type AS VARCHAR) = CAST(:categoryType AS VARCHAR)) " +
+            "AND (:conty ISNULL OR a.county = CAST(:conty AS VARCHAR)) " +
+            "AND (:state ISNULL OR CAST(a.state AS VARCHAR) = CAST(:state AS VARCHAR)) " +
+            "AND (:category ISNULL OR d.category_id = CAST(:category AS BIGINT)) " +
+            "AND (:cpf ISNULL OR CAST(u.cpf AS VARCHAR) = CAST(:cpf AS VARCHAR)) " +
+            "AND (:dateReg ISNULL OR d.date_created = CAST(:dateReg AS TIMESTAMP)) " +
+            "AND (:dateFact ISNULL OR d.date_fact = CAST(:dateFact AS TIMESTAMP)) " +
+            "AND (:situation ISNULL OR CAST(d.situation AS VARCHAR) = CAST(:situation AS VARCHAR))",
+            nativeQuery = true)
+    public List<Denunciation> findyByParameters(@Param("categoryType") String categoryType,
+                                                @Param("conty") String conty,
+                                                @Param("state") String state,
                                                 @Param("category") Long category,
                                                 @Param("cpf") String cpf,
-                                                @Param("dateReg")Date dateReg,
-                                                @Param("dateFact")Date dateFact,
-                                                @Param("situation")String situation);
+                                                @Param("dateReg") String dateReg,
+                                                @Param("dateFact") String dateFact,
+                                                @Param("situation") String situation);
 
 }

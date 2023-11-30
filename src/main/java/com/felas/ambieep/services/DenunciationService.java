@@ -75,8 +75,9 @@ public class DenunciationService {
     }
 
     public List<Denunciation> findByParameters(DenunciationGETPJSON denunciationGETPJSON){
-        return denunciationRepository.findyByParameters(denunciationGETPJSON.categoryType().toString(),
-                denunciationGETPJSON.conty(), denunciationGETPJSON.state().toString(), denunciationGETPJSON.category().getId(),
-                denunciationGETPJSON.cpf(),denunciationGETPJSON.dateReg(),denunciationGETPJSON.dateFact(),denunciationGETPJSON.situation().toString());
+        List<Denunciation> list = denunciationRepository.findyByParameters(denunciationGETPJSON.categoryType(),
+                denunciationGETPJSON.conty(), denunciationGETPJSON.state(), denunciationGETPJSON.category(),
+                denunciationGETPJSON.cpf(),denunciationGETPJSON.dateReg(),denunciationGETPJSON.dateFact(),denunciationGETPJSON.situation());
+        return list;
     }
 }

@@ -14,6 +14,7 @@ import java.util.List;
 public class Denunciation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_denun")
     private Long id;
     @Column(unique = true)
     private String nProtocol;
@@ -23,11 +24,12 @@ public class Denunciation {
     @JoinColumn(name = "users_id")
     private User user;
     @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    @JoinColumn(name = "address_id", referencedColumnName = "id_adr")
     private Address address;
+    @Column(name = "descrpition_user")
     private String description;
     @ManyToOne
-    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    @JoinColumn(name = "category_id", referencedColumnName = "id_categ")
     private Category category;
     @Column(nullable = false)
     private Date dateFact;

@@ -37,7 +37,7 @@ public class DenunciationController {
         return ResponseEntity.ok(denunciationService.progressConclude(denunciationPUTConcludeJSON));
     }
 
-    @PutMapping("/find")
+    @GetMapping("/find")
     public ResponseEntity<List<Denunciation>> findByParameters(@RequestBody DenunciationGETPJSON denunciationGETPJSON){
         return ResponseEntity.ok(denunciationService.findByParameters(denunciationGETPJSON));
     }

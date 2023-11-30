@@ -12,8 +12,9 @@ import java.util.List;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_categ")
     private Long id;
-    @Column(length = 8000)
+    @Column(length = 8000, name = "description_categ")
     private String description;
     @Enumerated(EnumType.STRING)
     private CategoryType categoryType;
