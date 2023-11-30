@@ -1,16 +1,15 @@
 package com.felas.ambieep.controller;
 
 import com.felas.ambieep.entites.Denunciation;
-import com.felas.ambieep.entites.records.denunciation.DenunciationGETJSON;
-import com.felas.ambieep.entites.records.denunciation.DenunciationPOSTJSON;
-import com.felas.ambieep.entites.records.denunciation.DenunciationPUTConcludeJSON;
-import com.felas.ambieep.entites.records.denunciation.DenunciationPUTProgJOSN;
+import com.felas.ambieep.entites.records.denunciation.*;
 import com.felas.ambieep.services.DenunciationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/denunciation")
@@ -36,6 +35,11 @@ public class DenunciationController {
     @PutMapping("/conclude")
     public  ResponseEntity<String> progressConclude(@RequestBody DenunciationPUTConcludeJSON denunciationPUTConcludeJSON){
         return ResponseEntity.ok(denunciationService.progressConclude(denunciationPUTConcludeJSON));
+    }
+
+    @PutMapping("/find")
+    public ResponseEntity<List<Denunciation>> findByParameters(@RequestBody DenunciationGETPJSON denunciationGETPJSON){
+        return ResponseEntity.ok(denunciationService.findByParameters(denunciationGETPJSON));
     }
 
 }

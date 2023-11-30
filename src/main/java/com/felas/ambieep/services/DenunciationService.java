@@ -4,6 +4,7 @@ import com.felas.ambieep.entites.Denunciation;
 import com.felas.ambieep.entites.Photos;
 import com.felas.ambieep.entites.TechnicalRegister;
 import com.felas.ambieep.entites.records.TechnicalRegisterJSON;
+import com.felas.ambieep.entites.records.denunciation.DenunciationGETPJSON;
 import com.felas.ambieep.entites.records.denunciation.DenunciationPOSTJSON;
 import com.felas.ambieep.entites.records.denunciation.DenunciationPUTConcludeJSON;
 import com.felas.ambieep.entites.records.denunciation.DenunciationPUTProgJOSN;
@@ -55,7 +56,7 @@ public class DenunciationService {
     public String progressComplaint(DenunciationPUTProgJOSN denunciationPUTProgJOSN) {
         Denunciation denunciation = findByProtocol(denunciationPUTProgJOSN.nProtocol());
         denunciation.setSituation(denunciationPUTProgJOSN.situation());
-        TechnicalRegister technicalRegister = new TechnicalRegister(null, userRepository.findByCpf(denunciationPUTProgJOSN.analystCPF()), null);
+        TechnicalRegister technicalRegister = new TechnicalRegister(null, userRepository.findByCpf(denunciationPUTProgJOSN.analystCPF()), denunciationPUTProgJOSN.description(),null);
         technicalRegister = techinicalRegisterRepository.save(technicalRegister);
         denunciation.setTechnicalRegister(technicalRegister);
         denunciationRepository.save(denunciation);
@@ -71,5 +72,11 @@ public class DenunciationService {
         denunciationRepository.save(denunciation);
 
         return "Protocol " + denunciationPUTConcludeJSON.nProtocol() + " concluded";
+    }
+
+    public List<Denunciation> findByParameters(DenunciationGETPJSON denunciationGETPJSON){
+        return denunciationRepository.findyByParameters(denunciationGETPJSON.categoryType().toString(),
+                denunciationGETPJSON.conty(), denunciationGETPJSON.state().toString(), denunciationGETPJSON.category().getId(),
+                denunciationGETPJSON.cpf(),denunciationGETPJSON.dateReg(),denunciationGETPJSON.dateFact(),denunciationGETPJSON.situation().toString());
     }
 }

@@ -22,9 +22,10 @@ public class TechnicalRegister {
 
     }
 
-    public TechnicalRegister(Long id, User analystUser, String technicalReport) {
+    public TechnicalRegister(Long id, User analystUser, String description,String technicalReport) {
         this.id = id;
         this.analystUser = analystUser;
+        this.description = description;
         this.technicalReport = technicalReport;
         this.updateDate = Dates.now();
     }

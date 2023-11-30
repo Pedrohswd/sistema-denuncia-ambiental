@@ -5,5 +5,6 @@ import com.felas.ambieep.entites.enums.Situation;
 
 public record DenunciationPUTProgJOSN(String nProtocol,
                                       Situation situation,
+                                      String description,
                                       String analystCPF) {
 }
