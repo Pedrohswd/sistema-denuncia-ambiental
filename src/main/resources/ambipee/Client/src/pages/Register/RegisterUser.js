@@ -1,45 +1,61 @@
 import './RegisterUser.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Axios from 'axios';
+import api from '../../api/axiosConfig';
 import { useNavigate } from 'react-router-dom';
 import { AiOutlineEyeInvisible } from 'react-icons/ai';
 import NavBar from '../../components/NavBar/NavBar';
 
 function RegisterUser() {
- 
+
     const [passwordShown, setPasswordShown] = useState(false);
     const [user, setUser] = useState({
-        name: "",
         cpf: "",
+        name: "",
         password: "",
-        permission: "",
         phone: "",
+        permission: "",
     });
+    const getUser = async () => {
+        try {
+            const response = await api.get("/api/users/1");
+            setUser(response.data);
+            console.log(response.data);
 
-    const navigate = useNavigate();
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+    useEffect(() =>{
+        getUser();
+    },[])
+
+
     const preventSubmit = (e) => {
         e.preventDefault();
     };
     const handleInput = (e) => {
         setUser({ ...user, [e.target.name]: e.target.value })
+        
     };
     const togglePasswordVisiblity = () => {
         setPasswordShown(passwordShown ? false : true);
     };
 
-
     const handleSubmit = async () => {
         // Envia uma requisição para a url com os dados do user
-        await Axios.post("http://localhost:8080/api/users/register", {
+        await api.post("http://localhost:8080/api/users/register", {
             cpf: user.cpf,
             password: user.password,
             name: user.name,
             phone: user.phone,
             permission: user.permission
 
-        }).then((response) => {
-            alert('Novo usuário cadastrado.');
-            navigate('/login');
+        }).then((response) =>{
+            return response.data
+        }).catch((error) =>{
+            console.log(error);
         })
     };
 
@@ -55,16 +71,16 @@ function RegisterUser() {
                     <input type="text" name="cpf" placeholder="CPF" value={user.cpf} onChange={handleInput} required />
                     <input type="text" name="name" placeholder="Nome" value={user.name} onChange={handleInput} required />
                     <input type="text" name="phone" placeholder="Telefone" value={user.phone} onChange={handleInput} required />
-                    <select>
-                        <option>DENUNCIANTE</option>
-                        <option>ANALISTA</option>
-                    </select>
                     <input type={passwordShown ? 'text' : 'password'} name="password" placeholder="Senha" value={user.password} onChange={handleInput} required />
                     <div className='show_pwd_add' onClick={togglePasswordVisiblity}>
                         <AiOutlineEyeInvisible size={25} />
                     </div>
+                    <select>
+                        <option>DENUNCIANTE</option>
+                        <option>ANALISTA</option>
+                    </select>
                     <br /><br />
-                    <button className='btn_add' onClick={handleSubmit}>Cadastrar</button>
+                    <button className='btn_add' onClick={handleSubmit}>CADASTRAR</button>
                 </form>
             </div >
         </div >

@@ -9,7 +9,7 @@ import { TbReportMoney } from 'react-icons/tb';
 
 function NavBar() {
     const navigate = useNavigate();
-    const department = localStorage.getItem('department');
+    const permission = localStorage.getItem('permission');
     const logOut = () => {
         localStorage.clear();
         navigate('/login');
@@ -31,11 +31,6 @@ function NavBar() {
                         <FaUserPlus color='white' />
                         <span className='span'>Cadastrar usuário </span>
                     </NavLink>
-                    {/* Condição para esconder a opção do menu lateral */}
-                    {department === 'estrategiaeprodutos' || department === 'diretoria' || department === 'financeiro' ? <NavLink to="/financeiro" className="nav-link">
-                        <TbReportMoney color='white' />
-                        <span className='span'>Financeiro</span>
-                    </NavLink> : <p></p>}
                     <NavLink to="/login" className='logoutButton' onClick={logOut}>
                         <FaSignOutAlt color='white' />
                         <span className='span'>Sair</span>

@@ -1,24 +1,65 @@
 import './Login.css';
 import { useState, React } from 'react';
-import Axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { FaLock } from 'react-icons/fa';
 import { AiOutlineEyeInvisible } from 'react-icons/ai';
+import api from '../../api/axiosConfig';
+
+
 
 function Login() {
 
-
-    /*
     var accessToken, msg, permission, userName, cpf, phone = null;
+    const navigate = useNavigate();
+    const [passwordShown, setPasswordShown] = useState(false);
+    const togglePasswordVisiblity = () => {
+        setPasswordShown(passwordShown ? false : true);
+    };
     const [user, setUser] = useState({
         cpf: "",
         password: "",
-        permission: "",
+        permission: "", 
         userName: "",
         phone: ""
     });
+    const handleInput = (e) => {
+        setUser({ ...user, [e.target.name]: e.target.value });
+    };
+    const preventSubmit = (e) => {
+        e.preventDefault();
+    };
+    const handleSubmit = async () => {
+            await api.post("http://localhost:8080/api/users/cpf", {
+            cpf: user.cpf,
+            password: user.password
+        }).then((response) => {
+            if (response.data.status === true) {
+                accessToken = response.data.cpf;
+                permission = response.data.permission;
+                userName = response.data.userName;
+                cpf = response.data.cpf;
+                phone = response.data.phone;
+
+                localStorage.setItem('accessToken', accessToken);
+                localStorage.setItem('cpf', cpf);
+                localStorage.setItem('permission', permission);
+                localStorage.setItem('userName', userName);
+                localStorage.setItem('phone', phone);
+                navigate('/');
+            } else {
+                msg = response.data.msg;
+                if (msg === 'wrongPassword') alert('Senha incorreta. Verifique seus dados e tente novamente.');
+                if (msg === 'wrongCPF') alert('Usuário não encontrado. Verifique seus dados e tente novamente.');
+            }
+        })
+    }; 
+
+
+    
+    /*
+    
     const [passwordShown, setPasswordShown] = useState(false);
-    const navigate = useNavigate();
+    
     const togglePasswordVisiblity = () => {
         setPasswordShown(passwordShown ? false : true);
     };
@@ -73,8 +114,8 @@ const handleSubmit = async () => {
                 </div>
 
                 <div className='loginFooter'>
-                    <button className='btn-c'>Criar conta</button>
-                    <button className='btn-d'>Criar denuncia anonimamente</button>
+                    <button className='btn-c' onClick={() => navigate('/register/user')}>Criar conta</button>
+                    <button className='btn-d'onClick={() => navigate('/register/denuncia')}>Criar denuncia anonimamente</button>
                 </div>
             </div>
         </div>

@@ -3,7 +3,7 @@ body,
     width: 100%;
     height: 100%;
     margin: 0;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 #loginFormContainer input:-webkit-autofill,
@@ -21,12 +21,13 @@ body,
 
 .loginMain {
     height: 100vh;
-    background: linear-gradient(180deg, rgba(2, 0, 36, 1) 0%, rgba(53, 88, 52, 1) 0%, rgb(77, 182, 69) 100%);
+    background: #f2f2f2;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
+
 .loginFormContainer{
     display: flex;
     flex-direction: column;
@@ -36,7 +37,7 @@ body,
     height: 400px;
     box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, 0.2);
     border-radius: 25px;
-    background-color: rgba(241,245,242,0.6);
+    background-color: rgba(64, 143, 61, 0.6);
 }
 .textbox{
     margin: 10px 10px 10px 10px;
@@ -47,6 +48,51 @@ body,
     border:none;
     border-radius: 25px;
     height: 20px;
+}
+.loginFooter{
+    display: flex;
+    margin-top: 25px;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 300px;
+    height: auto;
+}
+
+.btn-c{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 100px;
+    border: none;
+    padding: 0;
+    margin-right: 5px;
+    height: 30px;
+    color: white;
+    font-size: 14px;
+    border-radius: 20px;
+    background-color: #1073c4;
+    box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+.btn-d{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 250px;
+    margin-left: 5px;
+    border: none;
+    padding: 0;
+    height: 30px;
+    color: white;
+    font-size: 14px;
+    border-radius: 20px;
+    background-color: #4d667a;
+    box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+.btn-c:hover {
+    color: rgb(193, 192, 192);
+    background-color: #0f4775;
+}
+.btn-d:hover {
+    color: rgb(193, 192, 192);
+    background-color: #31414e;
 }
 
 
@@ -61,14 +107,14 @@ body,
     color: white;
     font-size: 15px;
     border-radius: 20px;
-    background-color: #C2A878;
+    background-color: #1073c4;
     box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, 0.2);
     cursor: pointer;
 }
 
 .btn_entrar:hover {
     color: rgb(193, 192, 192);
-    background-color: #6E633D;
+    background-color: #0f4775;
 }
 
 @media only screen and (max-width: 450px) {
