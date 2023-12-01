@@ -2,6 +2,7 @@ package com.felas.ambieep.repositories;
 
 import com.felas.ambieep.entites.Category;
 import com.felas.ambieep.entites.Denunciation;
+import com.felas.ambieep.entites.enums.State;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -21,7 +22,7 @@ public interface DenunciationRepository extends JpaRepository<Denunciation, Long
             "WHERE " +
             "(:categoryType ISNULL OR CAST(c.category_type AS VARCHAR) = CAST(:categoryType AS VARCHAR)) " +
             "AND (:conty ISNULL OR a.county = CAST(:conty AS VARCHAR)) " +
-            "AND (:state ISNULL OR CAST(a.state AS VARCHAR) = CAST(:state AS VARCHAR)) " +
+            "AND (:state ISNULL OR a.state = CAST(:state AS INTEGER)) " +
             "AND (:category ISNULL OR d.category_id = CAST(:category AS BIGINT)) " +
             "AND (:cpf ISNULL OR CAST(u.cpf AS VARCHAR) = CAST(:cpf AS VARCHAR)) " +
             "AND (:dateReg ISNULL OR d.date_created = CAST(:dateReg AS TIMESTAMP)) " +

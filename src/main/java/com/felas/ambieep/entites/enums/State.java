@@ -1,62 +1,47 @@
 package com.felas.ambieep.entites.enums;
 
 public enum State {
-    AC("Acre", 12),
-    AL("Alagoas", 27),
-    AP("Amapá", 16),
-    AM("Amazonas", 13),
-    BA("Bahia", 29),
-    CE("Ceará", 23),
-    DF("Distrito Federal", 53),
-    ES("Espírito Santo", 32),
-    GO("Goiás", 52),
-    MA("Maranhão", 21),
-    MT("Mato Grosso", 51),
-    MS("Mato Grosso do Sul", 50),
-    MG("Minas Gerais", 31),
-    PA("Pará", 15),
-    PB("Paraíba", 25),
-    PR("Paraná", 41),
-    PE("Pernambuco", 26),
-    PI("Piauí", 22),
-    RJ("Rio de Janeiro", 33),
-    RN("Rio Grande do Norte", 24),
-    RS("Rio Grande do Sul", 43),
-    RO("Rondônia", 11),
-    RR("Roraima", 14),
-    SC("Santa Catarina", 42),
-    SP("São Paulo", 35),
-    SE("Sergipe", 28),
-    TO("Tocantins", 17);
-
-    private final String name;
+    AC(0),
+    AL(1),
+    AP(2),
+    AM(3),
+    BA(4),
+    CE(5),
+    DF(6),
+    ES(7),
+    GO(8),
+    MA(9),
+    MT(10),
+    MS(11),
+    MG(12),
+    PA(13),
+    PB(14),
+    PR(15),
+    PE(16),
+    PI(17),
+    RJ(18),
+    RN(19),
+    RS(20),
+    RO(21),
+    RR(22),
+    SC(23),
+    SP(24),
+    SE(25),
+    TO(26);
 
     private final int id;
 
-
-    State(String nomeCompleto, int id) {
-        this.name = nomeCompleto;
+    State(int id) {
         this.id = id;
     }
 
-    public String getNome() {
-        return name;
-    }
-
-    public String getAcronym(){
-        return this.toString();
-    }
-
-    public int getId(){
+    public int getId() {
         return id;
     }
 
-    public State getById(int id){
-        for (State e : this.values()){
-            if (e.getId() == id){
-                return e;
-            }
-        }
-        return null;
+    // Função para obter o ID a partir de uma instância da enumeração
+    public static int getIdFromState(State state) {
+        return state.getId();
     }
+
 }

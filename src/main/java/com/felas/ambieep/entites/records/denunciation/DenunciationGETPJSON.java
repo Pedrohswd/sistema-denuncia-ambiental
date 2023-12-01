@@ -8,7 +8,7 @@ import com.felas.ambieep.entites.enums.State;
 import java.util.Date;
 
 public record DenunciationGETPJSON(String cpf,
-                                   String state,
+                                   State state,
                                    String conty,
                                    String categoryType,
                                    Long category,

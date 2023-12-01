@@ -14,7 +14,7 @@ public class TechnicalRegister {
     @ManyToOne
     private User analystUser;
     private String technicalReport;
-
+    @Column(name = "description_tr")
     private String description;
     private Date updateDate;
 
@@ -50,6 +50,14 @@ public class TechnicalRegister {
 
     public void setAnalystUser(User analystUser) {
         this.analystUser = analystUser;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getTechnicalReport() {
