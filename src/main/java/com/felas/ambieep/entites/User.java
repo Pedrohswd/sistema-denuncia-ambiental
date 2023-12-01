@@ -3,12 +3,15 @@ package com.felas.ambieep.entites;
 import com.felas.ambieep.entites.enums.Permission;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 
 @Entity
-@Table(name = "Users")
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_usr")
     private Long id;
     @Column(unique=true, nullable = false)
     private String cpf;
@@ -20,6 +23,9 @@ public class User {
     private String phone;
     @Enumerated(EnumType.STRING)
     private Permission permission;
+
+    @OneToMany(mappedBy = "user")
+    private List<Denunciation> denunciation;
 
     public User(){
 

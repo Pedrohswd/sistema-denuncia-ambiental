@@ -1,8 +1,8 @@
 package com.felas.ambieep.services;
 
 import com.felas.ambieep.entites.User;
-import com.felas.ambieep.entites.records.NewUserRecordJSON;
-import com.felas.ambieep.entites.records.UpdateUserRecordJSON;
+import com.felas.ambieep.entites.records.user.NewUserRecordJSON;
+import com.felas.ambieep.entites.records.user.UpdateUserRecordJSON;
 import com.felas.ambieep.repositories.UserRepository;
 import com.felas.ambieep.utils.CPF;
 import com.felas.ambieep.utils.CriptoHash;

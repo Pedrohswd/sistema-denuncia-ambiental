@@ -1,18 +1,25 @@
 package com.felas.ambieep.entites;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.felas.ambieep.entites.enums.CategoryType;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "category")
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_categ")
     private Long id;
-    @Column(length = 8000)
+    @Column(length = 8000, name = "description_categ")
     private String description;
     @Enumerated(EnumType.STRING)
     private CategoryType categoryType;
+    @OneToMany(mappedBy = "category")
+    private List<Denunciation> denunciations;
 
     public Category(){
 

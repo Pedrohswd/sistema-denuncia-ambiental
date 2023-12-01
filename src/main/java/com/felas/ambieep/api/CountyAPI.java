@@ -19,7 +19,7 @@ import java.util.Map;
 public class CountyAPI {
 
     public List<CountyJSON> contryByState(State state) {
-        String url = "https://servicodados.ibge.gov.br/api/v1/localidades/estados/" + state.getAcronym() + "/municipios";
+        String url = "https://servicodados.ibge.gov.br/api/v1/localidades/estados/" + state+ "/municipios";
         String request = request(url, "GET", null);
 
         try {

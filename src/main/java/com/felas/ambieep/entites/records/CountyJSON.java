@@ -54,7 +54,7 @@ public record CountyJSON(
 
                 public State siglaUF() {
                     for (State e : State.values()) {
-                        if (e.getAcronym().equals(this.sigla.toUpperCase())) {
+                        if (e.equals(this.sigla.toUpperCase())) {
                             return e;
                         }
                     }
