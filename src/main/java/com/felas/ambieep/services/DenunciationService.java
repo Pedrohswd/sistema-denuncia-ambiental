@@ -96,4 +96,10 @@ public class DenunciationService {
 
         return list;
     }
+    public String updateCategoryDenun(DenunciationPUTUpJSON denunciationPUTUpJSON){
+        Denunciation denunciation = findByProtocol(denunciationPUTUpJSON.nProtocol());
+        denunciation.setCategory(denunciationPUTUpJSON.category());
+        denunciationRepository.save(denunciation);
+        return "Update Conclude";
+    }
 }
