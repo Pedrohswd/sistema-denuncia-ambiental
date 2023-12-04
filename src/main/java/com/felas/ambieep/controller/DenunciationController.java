@@ -4,8 +4,6 @@ import com.felas.ambieep.entites.Denunciation;
 import com.felas.ambieep.entites.records.denunciation.*;
 import com.felas.ambieep.services.DenunciationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +28,11 @@ public class DenunciationController {
     @PutMapping("/progress")
     public ResponseEntity<String> progressComplaint(@RequestBody DenunciationPUTProgJOSN denunciationPUTProgJOSN){
         return ResponseEntity.ok(denunciationService.progressComplaint(denunciationPUTProgJOSN));
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<String> updateCategory(@RequestBody DenunciationPUTUpJSON denunciationPUTUpJSON){
+        return ResponseEntity.ok(denunciationService.updateCategoryDenun(denunciationPUTUpJSON));
     }
 
     @PutMapping("/conclude")
