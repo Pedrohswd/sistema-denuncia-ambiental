@@ -32,8 +32,8 @@ public class Denunciation {
     @JoinColumn(name = "category_id", referencedColumnName = "id_categ")
     private Category category;
     @Column(nullable = false)
-    private Date dateFact;
-    private Date dateCreated;
+    private String dateFact;
+    private String dateCreated;
     @Column(nullable = false)
     private String author;
     @Enumerated(EnumType.STRING)
@@ -51,7 +51,7 @@ public class Denunciation {
         this.description = denunciationJSON.description();
         this.category = denunciationJSON.category();
         this.dateFact = denunciationJSON.dateFact();
-        this.dateCreated = Dates.now();
+        this.dateCreated = Dates.now().toString();
         this.author = denunciationJSON.author();
         this.address = denunciationJSON.address();
         this.situation = denunciationJSON.situation();
@@ -113,19 +113,19 @@ public class Denunciation {
         this.category = category;
     }
 
-    public Date getDateFact() {
+    public String getDateFact() {
         return dateFact;
     }
 
-    public void setDateFact(Date dateFact) {
+    public void setDateFact(String dateFact) {
         this.dateFact = dateFact;
     }
 
-    public Date getDateCreated() {
+    public String getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(Date dateCreated) {
+    public void setDateCreated(String dateCreated) {
         this.dateCreated = dateCreated;
     }
 

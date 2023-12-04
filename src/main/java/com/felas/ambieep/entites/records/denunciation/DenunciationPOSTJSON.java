@@ -12,7 +12,7 @@ public record DenunciationPOSTJSON(
         List<String> photos,
         Category category,
         String description,
-        Date dateFact,
+        String dateFact,
         String author,
         Situation situation,
         Address address) {
