@@ -34,7 +34,7 @@ public class UserController {
 
     @GetMapping("/cpf/{cpf}")
     public ResponseEntity<User> findUserbyCPF(@PathVariable String cpf) {
-        User usuario = userService.findUserbyCPF(cpf);
+        User usuario = userService.findUserbyCPF(CPF.retirarMascara(cpf));
         return usuario != null ? ResponseEntity.ok(usuario) : ResponseEntity.notFound().build();
     }
 

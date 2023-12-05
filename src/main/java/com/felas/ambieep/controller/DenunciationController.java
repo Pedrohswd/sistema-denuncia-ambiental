@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/denunciation")
+@CrossOrigin(origins = "http://localhost:3000")
 public class DenunciationController {
 
     @Autowired

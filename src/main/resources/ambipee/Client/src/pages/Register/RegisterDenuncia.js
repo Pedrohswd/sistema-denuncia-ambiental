@@ -7,6 +7,7 @@ function RegisterDenuncia() {
 
     var cpf = localStorage.getItem('cpf');
     var id = localStorage.getItem('id');
+    var role = localStorage.getItem('role')
 
     const [categorias, setCategorias] = useState([]);
     const [categoriaSelecionada, setCategoriaSelecionada] = useState('');
@@ -16,7 +17,8 @@ function RegisterDenuncia() {
     const [municipio, setMunicipio] = useState('');
 
     const [categoryDenun, setCategoryDenun] = useState({
-        description:'',
+        id: 0,
+        description: '',
     })
     const [address, setAddress] = useState({
         street: "",
@@ -34,12 +36,25 @@ function RegisterDenuncia() {
         phone: "",
     });
     const [denuncia, setDenuncia] = useState({
-        user: '',
+        nProtocol:"",
+        user: {
+            id: id,
+            cpf: cpf
+        },
         description: '',
-        category: '',
+        category: {
+            id: 0,
+            description: ""
+        },
         dateFact: '',
-        author: '',
-        address: '',
+        address: {
+            street: "",
+            state: "",
+            county: "",
+            latitude: 0,
+            longitude: 0
+        },
+        author: "",
         situation: 'CRIADA'
     });
 
@@ -57,22 +72,44 @@ function RegisterDenuncia() {
         }
     };
 
-
-    const handleSubmit = async (e) =>{
-        e.preventDefault();
-        let descricao = subcategoria.description;
-        try {
-            const resp = await api.get(`/api/category/description${description}`, {
-                description: descricao
-            }).then((resp) =>{
-                setCategoryDenun(resp.data);
-                console.log(categoryDenun.description);
-            })
-
-        } catch (error) {
-            
-        }
-    }
+    const handleSubmit = async () => {
+        console.log(denuncia)
+        // Envia uma requisição para a url com os dados do user
+        await api.post("/api/denunciation/create", {
+            nProtocol:"",
+            user: {
+                id: id,
+                cpf: cpf,
+                name: "",
+                phone: "",
+                role: role
+            },
+            photos:[],
+            category: {
+                id: denuncia.category,
+                name: "",
+                type: ""
+            },
+            description: denuncia.description,
+            dateFact: denuncia.dateFact,
+            author: denuncia.author,
+            situation: 'CRIADA',
+            address: {
+                street: denuncia.address.street,
+                state: denuncia.address.state,
+                county: denuncia.address.county,
+                latitude: denuncia.address.latitude,
+                longitude: denuncia.address.longitude
+            }
+        }).then((response) => {
+            if(response.data){
+                denuncia.nProtocol= response.data
+                console.log(denuncia.nProtocol)
+            }
+        }).catch((error) => {
+            console.log(error);
+        })
+    };
 
     useEffect(() => {
         atualizarOpcoes();
@@ -93,22 +130,6 @@ function RegisterDenuncia() {
     useEffect(() => {
         getUser();
     }, [])
-
-
-    const atualizarMunicipio = async () => {
-        try {
-            const response = await api.get(`/api/county/list/${estado}`);
-            const data = response.data;
-            setMunicipio(data);
-            
-        } catch (error) {
-            console.error('Erro ao buscar o estado:', error)
-        }
-    };
-
-    useEffect(() => {
-        atualizarMunicipio();
-    }, [estado]);
 
     return (
         <div>
@@ -132,15 +153,24 @@ function RegisterDenuncia() {
                     </select>
 
                     <label htmlFor="subcategoria">Escolha a subcategoria:</label>
-                    <select id="subcategoria" value={denuncia.category} onChange={handleInput} name="category">
+                    <select
+                        id="subcategoria"
+                        value={denuncia.category}
+                        onChange={(e) => {
+                            handleInput(e); // Para atualizar o estado 'category' na sua 'denuncia'
+                            const selectedCategoryId = e.target.value;
+                            console.log(selectedCategoryId); // Aqui você pode acessar o id selecionado
+                        }}
+                        name="category"
+                    >
                         <option value="">Selecione...</option>
                         {subcategorias.map((subcategoria) => (
-                            <option key={subcategoria.id} value={subcategoria.description}>
+                            <option key={subcategoria.id} value={subcategoria.id}>
                                 {subcategoria.description}
-                                {console.log(subcategoria.id)}
                             </option>
                         ))}
                     </select>
+                    console.log(subcategoria.id)
 
                     {/* Adicione um botão ou evento para acionar a atualização das subcategorias */}
                     <button type="button" onClick={atualizarOpcoes}>Atualizar Subcategorias</button>
@@ -149,17 +179,17 @@ function RegisterDenuncia() {
                     <fieldset>
                         <legend>Endereço*</legend>
                         <label>Logradouro</label>
-                        <input type='text' name='address' onChange={handleInput} value={address.street}></input>
+                        <input type='text' name='address' onChange={handleInput} value={denuncia.address.street}></input>
                         <label>Latitude*</label>
-                        <input type='text' required name='latitude' onChange={handleInput} value={address.latitude}></input>
+                        <input type='text' required name='latitude' onChange={handleInput} value={denuncia.address.latitude}></input>
                         <label>Longitude*</label>
-                        <input type='text' required name='latitude' onChange={handleInput} value={address.longitude}></input>
+                        <input type='text' required name='latitude' onChange={handleInput} value={denuncia.address.longitude}></input>
                         <label>Estado*</label>
-                        <select id='estado' value={estado} onChange={(e) => setEstado(e.target.value)}>
+                        <select id='estado' value={denuncia.address.state} onChange={(e) => setEstado(e.target.value)}>
                             <option value='GO'>GO</option>
                         </select>
                         <label>Município*</label>
-                        <select required name='municipio' onChange={handleInput} value={address.county}>
+                        <select required name='municipio' onChange={handleInput} value={denuncia.address.county}>
                             <option value='Abadia de Goiás'>Abadia de Goiás</option>
                             <option value='Abadiânia'>Abadiânia</option>
                             <option value='Acreúna'>Acreúna</option>
@@ -409,14 +439,14 @@ function RegisterDenuncia() {
                         </select>
                     </fieldset>
                     <label>Descrição*</label>
-                    <textarea required placeholder='Descreva o que está sendo denunciado'></textarea>
+                    <textarea placeholder='Descreva o que está sendo denunciado' name='description' onChange={handleInput} value={denuncia.description}></textarea>
                     <label>Data do ocorrido</label>
-                    <input type='date'></input>
+                    <input type='date' name='dateFact' onChange={handleInput} value={denuncia.dateFact}></input>
                     <label>Imagem</label>
                     <input type='file' name='image'></input>
-                    <label>Denunciante</label>
-                    <input type='text'></input>
-                    <button type='submit' onSubmit={handleSubmit}>Enviar Denúncia</button>
+                    <label>Possivel autor</label>
+                    <input type='text' name='author' onChange={handleInput} value={denuncia.author}></input>
+                    <button type='submit' onClick={handleSubmit}>Enviar Denúncia</button>
                 </form>
             </div >
         </div >
