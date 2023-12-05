@@ -9,6 +9,9 @@ import NavBar from '../../components/NavBar/NavBar';
 function RegisterUser() {
 
     const [passwordShown, setPasswordShown] = useState(false);
+    var permissao = localStorage.getItem('permission');
+
+
     const [user, setUser] = useState({
         cpf: "",
         name: "",
@@ -75,9 +78,9 @@ function RegisterUser() {
                     <div className='show_pwd_add' onClick={togglePasswordVisiblity}>
                         <AiOutlineEyeInvisible size={25} />
                     </div>
-                    <select>
-                        <option>DENUNCIANTE</option>
-                        <option>ANALISTA</option>
+                    <select className={permissao === 'ANALISTA' ? 'sel-a' : 'sel-d'} value={user.permission} onChange={handleInput}>
+                        <option value='DENUNCIANTE'>DENUNCIANTE</option>
+                        <option value='ANALISTA'>ANALISTA</option>
                     </select>
                     <br /><br />
                     <button className='btn_add' onClick={handleSubmit}>CADASTRAR</button>

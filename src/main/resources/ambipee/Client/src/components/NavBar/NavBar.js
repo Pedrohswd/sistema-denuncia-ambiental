@@ -10,13 +10,6 @@ import { TbReportMoney } from 'react-icons/tb';
 function NavBar() {
     const navigate = useNavigate();
     const permission = localStorage.getItem('permission');
-    const [user, setUser] = useState({
-        cpf: "",
-        password: "",
-        permission: "",
-        userName: "",
-        phone: ""
-    });
     const logOut = () => {
         localStorage.clear();        
         navigate('/login');

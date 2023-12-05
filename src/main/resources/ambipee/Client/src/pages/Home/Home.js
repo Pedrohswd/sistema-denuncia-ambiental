@@ -11,11 +11,13 @@ function Home() {
         permission: "",
         phone: "",
     });
+    var cpf = localStorage.getItem('cpf');
     const getUser = async () => {
         try {
-            const response = await api.get("/api/users");
+            const response = await api.get(`/api/user/cpf/${cpf}`);
+
             setUser(response.data);
-            console.log(response.data);
+            console.log(user);
 
         } catch (error) {
             console.log(error);

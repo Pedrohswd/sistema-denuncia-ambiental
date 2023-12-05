@@ -38,11 +38,14 @@ function Login() {
             // Verifica se a autenticação foi bem-sucedida
             if (response.data) {
                 // Extraia os dados do usuário da resposta
-                const { permission, userName, cpf, phone } = response.data;
-
+                const { permission, name, cpf, phone } = response.data;
+                localStorage.setItem('cpf', cpf);
+                localStorage.setItem('phone', phone);
+                localStorage.setItem('name', name);
+                localStorage.setItem('permission', permission);
                 // Faça o que for necessário com os dados (por exemplo, armazenar em um estado global)
                 
-                // Redireciona para a página após o login bem-sucedido (substitua '/dashboard' pelo caminho desejado)
+                // Redireciona para a página após o login bem-sucedido
                 navigate('/');
             } else {
                 // Exibe uma mensagem de erro ao usuário (pode ser ajustado conforme necessário)

@@ -80,7 +80,12 @@
 .page-with-navbar {
 	margin-left: 15%;
 }
-
+.s-a{
+    
+}
+.sel-d{
+    display: none;
+}
 @media only screen and (max-width: 768px) {
 	.page-with-navbar {
 		width: 100%;
