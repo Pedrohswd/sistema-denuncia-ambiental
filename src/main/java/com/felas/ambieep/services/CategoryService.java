@@ -71,4 +71,8 @@ public class CategoryService {
         return categoryRepository.findById(id);
     }
 
+    public Category findByDescription(String category){
+        return categoryRepository.findByDescription(category);
+    }
+
 }

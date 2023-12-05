@@ -1,6 +1,7 @@
 package com.felas.ambieep.controller;
 
 import com.felas.ambieep.entites.Category;
+import com.felas.ambieep.entites.records.CategoryJSON;
 import com.felas.ambieep.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,4 +27,10 @@ public class CategoryController {
     public ResponseEntity<Optional<Category>> findCategory(@PathVariable Long id){
         return ResponseEntity.ok(categoryService.findById(id));
     }
+
+    @GetMapping("/description")
+    public ResponseEntity<Category> findByDescription(@RequestBody CategoryJSON categoryJSON){
+        return ResponseEntity.ok(categoryService.findByDescription(categoryJSON.description()));
+    }
+
 }
