@@ -67,15 +67,7 @@ function RegisterDenuncia() {
         setDenuncia({ ...denuncia, [e.target.name]: e.target.value });
     };
 
-    const atualizarOpcoes = async () => {
-        try {
-            const response = await api.get(`/api/category/list/${categoriaSelecionada}`);
-            const data = response.data;
-            setSubcategorias(data);
-        } catch (error) {
-            console.error('Erro ao buscar subcategorias:', error);
-        }
-    };
+
 
     const handleSubmit = async () => {
         console.log(denuncia)
@@ -148,10 +140,27 @@ function RegisterDenuncia() {
         }
     };
 
+    const atualizarOpcoes = async () => {
+        try {
+            const response = await api.get(`/api/category/list/${categoriaSelecionada}`);
+            const data = response.data;
+            setSubcategorias(data);
+        } catch (error) {
+            console.error('Erro ao buscar subcategorias:', error);
+        }
+    };
+
     useEffect(() => {
         atualizarOpcoes();
     }, [categoriaSelecionada]);
 
+    
+    
+    
+    
+    
+    
+    
     const getUser = async () => {
         try {
             const response = await api.get(`/api/user/cpf/${cpf}`);
@@ -164,6 +173,11 @@ function RegisterDenuncia() {
         }
 
     }
+    
+    
+    
+    
+    
     useEffect(() => {
         getUser();
     }, [])
@@ -207,10 +221,8 @@ function RegisterDenuncia() {
                             </option>
                         ))}
                     </select>
-                    console.log(subcategoria.id)
 
                     {/* Adicione um botão ou evento para acionar a atualização das subcategorias */}
-                    <button type="button" onClick={atualizarOpcoes}>Atualizar Subcategorias</button>
 
 
                     <fieldset>

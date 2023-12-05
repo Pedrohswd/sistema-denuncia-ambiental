@@ -1,0 +1,38 @@
+.denunSearch{
+    display: flex;
+    padding: 1rem;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-left: 500px;
+    width: 350px;
+    max-width: 1000px;
+    height: auto;
+    max-height: fit-content;
+}
+.table-denun{
+    margin-left: 500px;
+    border-bottom: 1px solid #ddd;
+    border-collapse: collapse;
+    width: 1000px;
+}
+.table-denun tr.heading td{
+    width: 1000px;
+    background: #eee;
+    padding: 3px;
+    font-size: 14px;
+    vertical-align: middle;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.table-denun tr.item td{
+    font-size: 14px;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+.item:hover{
+    background-color: rgb(199, 253, 199);
+    cursor: pointer;
+}
