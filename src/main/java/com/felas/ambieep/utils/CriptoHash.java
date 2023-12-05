@@ -6,24 +6,20 @@ import java.security.NoSuchAlgorithmException;
 public class CriptoHash {
     public static String hashPassword(String password) {
         try {
-            // Cria uma instância do MessageDigest com o algoritmo SHA-512
-            MessageDigest md = MessageDigest.getInstance("SHA-512");
+            MessageDigest md = MessageDigest.getInstance("SHA-512"); //1
 
-            // Converte a senha para bytes e aplica o hash
-            byte[] hashedBytes = md.digest(password.getBytes());
+            byte[] hashedBytes = md.digest(password.getBytes()); //1
 
-            // Converte os bytes hash para uma representação hexadecimal
-            StringBuilder stringBuilder = new StringBuilder();
-            for (byte b : hashedBytes) {
-                stringBuilder.append(String.format("%02x", b));
+            StringBuilder stringBuilder = new StringBuilder();//1
+            for (byte b : hashedBytes) { //n
+                stringBuilder.append(String.format("%02x", b));//1
             }
 
-            return stringBuilder.toString();
+            return stringBuilder.toString(); //1
 
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            // Lida com a exceção, por exemplo, lançando-a novamente ou retornando um valor padrão
-            return null;
+            e.printStackTrace();//1
+            return null; //1
         }
 
 

@@ -56,7 +56,7 @@ public class CategoryService {
         if (category.toUpperCase().equals(CategoryType.FAUNA.toString())) {
             return categoryRepository.findByType(CategoryType.FAUNA);
         } else if (category.toUpperCase().equals(CategoryType.FLORA.toString())) {
-            categoryRepository.findByType(CategoryType.FLORA);
+            return categoryRepository.findByType(CategoryType.FLORA);
         } else if (category.toUpperCase().equals(CategoryType.POLUICAO.toString())) {
             return categoryRepository.findByType(CategoryType.POLUICAO);
         } else if (category.toUpperCase().equals(CategoryType.ADMINISTRACAO_AMBIENTAL.toString())) {
