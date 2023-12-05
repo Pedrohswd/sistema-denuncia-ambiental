@@ -1,7 +1,6 @@
 package com.felas.ambieep.controller;
 
 import com.felas.ambieep.entites.Category;
-import com.felas.ambieep.entites.records.CategoryJSON;
 import com.felas.ambieep.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +16,9 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    @GetMapping
-    public ResponseEntity<List<Category>> listCategoryByType(@RequestBody CategoryJSON categoryJSON){
-        List<Category> listCategory = categoryService.findByType(categoryJSON);
+    @GetMapping("/list/{category}")
+    public ResponseEntity<List<Category>> listCategoryByType(@PathVariable String category){
+        List<Category> listCategory = categoryService.findByType(category);
         return ResponseEntity.ok(listCategory);
     }
 

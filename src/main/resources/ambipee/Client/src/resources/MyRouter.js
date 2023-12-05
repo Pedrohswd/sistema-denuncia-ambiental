@@ -10,11 +10,11 @@ function MyRouter() {
         <BrowserRouter>
             <Routes>
                 {/* Rotas sem proteção */}
-                <Route path='/login' element={ <Login /> } />
-                <Route path='/' element={ <Home/> } />
-                <Route path='/register/user' element={ <RegisterUser/> } />
-                <Route path='/denuncias' element={ <Denuncias/> }  />
-                <Route path='/register/denuncias' element={ <RegisterDenuncia/> } />
+                <Route path='/login' element={<Login />} />
+                <Route path='/' element={<Home />} />
+                <Route path='/register/user' element={<RegisterUser />} />
+                <Route path='/denuncias' element={<Denuncias />} />
+                <Route path='/register/denuncias' element={<RegisterDenuncia />} />
             </Routes>
         </BrowserRouter>
     );
