@@ -392,7 +392,7 @@ function Home() {
             </form>
             <table className='table-denun'>
                 <tr className='heading'>
-                    <td> ID: </td>
+                    <td> PROTOCOLO: </td>
                     <td> CPF DENUNCIANTE: </td>
                     <td> MUNICÍPIO: </td>
                     <td> CATEGORIA: </td>
@@ -403,7 +403,7 @@ function Home() {
                 </tr>
                 <tr className='item'>
                     <td>
-                        1
+                        1/23
                     </td>
                     <td>
                         12345666
@@ -424,7 +424,7 @@ function Home() {
                         01/12/2023
                     </td>
                     <td>
-                        EM andamento
+                        Em Andamento
                     </td>
                 </tr>
             </table>

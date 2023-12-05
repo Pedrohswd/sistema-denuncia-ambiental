@@ -37,9 +37,6 @@ public class DenunciationService {
         if (denunciation.getUser().getCpf() == null) {
             User user = userRepository.findByCpf("null");
             denunciation.setUser(user);
-        } else {
-            User usr = userRepository.findByCpf(denunciationJSON.user().getCpf());
-            denunciation.setUser(usr);
         }
         denunciation = denunciationRepository.save(denunciation);
         denunciation.setnProtocol(denunciation.getId() + "/" + Dates.year());
@@ -54,7 +51,6 @@ public class DenunciationService {
         if (denunciation != null) {
             List<Photos> photos = photosRepository.findByDenunciationId(denunciation.getId());
             denunciation.setPhotos(photos);
-            denunciation.getUser().setPassword("");
             if (denunciation.getTechnicalRegister() != null && denunciation.getTechnicalRegister().getAnalystUser() != null) {
                 denunciation.getTechnicalRegister().getAnalystUser().setPassword("");
             }
@@ -78,6 +74,7 @@ public class DenunciationService {
         denunciation.setSituation(denunciationPUTConcludeJSON.situation());
         TechnicalRegister technicalRegister = denunciation.getTechnicalRegister();
         technicalRegister.setTechnicalReport(denunciationPUTConcludeJSON.technicalReport());
+        technicalRegister.setDescription(denunciationPUTConcludeJSON.description());
         techinicalRegisterRepository.save(technicalRegister);
         denunciationRepository.save(denunciation);
 

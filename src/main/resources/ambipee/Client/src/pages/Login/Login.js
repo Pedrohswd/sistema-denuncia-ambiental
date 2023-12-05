@@ -69,7 +69,7 @@ function Login() {
                         <p>CPF:</p>
                         <input type="text" name="cpf" required onChange={handleInput} value={user.cpf} />
                         <p>Senha:</p>
-                        <input name="password" required onChange={handleInput} value={user.password} />
+                        <input name="password" type='password'required onChange={handleInput} value={user.password} />
                         <br /><br />
                         <button className='btn_entrar'onClick={handleSubmit}>Entrar</button>
                         
