@@ -4,13 +4,8 @@ import com.felas.ambieep.entites.Denunciation;
 import com.felas.ambieep.entites.Photos;
 import com.felas.ambieep.entites.TechnicalRegister;
 import com.felas.ambieep.entites.User;
-import com.felas.ambieep.entites.enums.Situation;
 import com.felas.ambieep.entites.enums.State;
-import com.felas.ambieep.entites.records.TechnicalRegisterJSON;
-import com.felas.ambieep.entites.records.denunciation.DenunciationGETPJSON;
-import com.felas.ambieep.entites.records.denunciation.DenunciationPOSTJSON;
-import com.felas.ambieep.entites.records.denunciation.DenunciationPUTConcludeJSON;
-import com.felas.ambieep.entites.records.denunciation.DenunciationPUTProgJOSN;
+import com.felas.ambieep.entites.records.denunciation.*;
 import com.felas.ambieep.repositories.*;
 import com.felas.ambieep.utils.Dates;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,18 +40,23 @@ public class DenunciationService {
         }
         denunciation = denunciationRepository.save(denunciation);
         denunciation.setnProtocol(denunciation.getId() + "/" + Dates.year());
+        denunciation.setDateCreated(Dates.formaterToDaS(denunciation.getDateCreated()));
+        denunciation.setDateFact(Dates.formaterToString(denunciation.getDateFact()));
         denunciationRepository.save(denunciation);
         return "Created protocol " + denunciation.getnProtocol();
     }
 
     public Denunciation findByProtocol(String string) {
         Denunciation denunciation = denunciationRepository.findByNProtocol(string);
-        List<Photos> photos = photosRepository.findByDenunciationId(denunciation.getId());
-        denunciation.setPhotos(photos);
-        denunciation.getUser().setPassword("");
-        if (denunciation.getTechnicalRegister() != null && denunciation.getTechnicalRegister().getAnalystUser() != null) {
-            denunciation.getTechnicalRegister().getAnalystUser().setPassword("");
+        if(denunciation != null){
+            List<Photos> photos = photosRepository.findByDenunciationId(denunciation.getId());
+            denunciation.setPhotos(photos);
+            denunciation.getUser().setPassword("");
+            if (denunciation.getTechnicalRegister() != null && denunciation.getTechnicalRegister().getAnalystUser() != null) {
+                denunciation.getTechnicalRegister().getAnalystUser().setPassword("");
+            }
         }
+
         return denunciation;
     }
 
@@ -95,5 +95,11 @@ public class DenunciationService {
         }
 
         return list;
+    }
+    public String updateCategoryDenun(DenunciationPUTUpJSON denunciationPUTUpJSON){
+        Denunciation denunciation = findByProtocol(denunciationPUTUpJSON.nProtocol());
+        denunciation.setCategory(denunciationPUTUpJSON.category());
+        denunciationRepository.save(denunciation);
+        return "Update Conclude";
     }
 }

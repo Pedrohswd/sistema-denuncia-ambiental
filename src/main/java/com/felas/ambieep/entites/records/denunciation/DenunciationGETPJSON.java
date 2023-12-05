@@ -15,5 +15,5 @@ public record DenunciationGETPJSON(String cpf,
                                    String dateReg,
                                    String dateFact,
                                    String situation
-                                   ) {
+) {
 }

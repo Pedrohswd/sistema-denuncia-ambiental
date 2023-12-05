@@ -25,8 +25,8 @@ public interface DenunciationRepository extends JpaRepository<Denunciation, Long
             "AND (:state ISNULL OR a.state = CAST(:state AS INTEGER)) " +
             "AND (:category ISNULL OR d.category_id = CAST(:category AS BIGINT)) " +
             "AND (:cpf ISNULL OR CAST(u.cpf AS VARCHAR) = CAST(:cpf AS VARCHAR)) " +
-            "AND (:dateReg ISNULL OR d.date_created = CAST(:dateReg AS TIMESTAMP)) " +
-            "AND (:dateFact ISNULL OR d.date_fact = CAST(:dateFact AS TIMESTAMP)) " +
+            "AND (:dateReg ISNULL OR CAST(d.date_created AS VARCHAR) = CAST(:dateReg AS VARCHAR)) " +
+            "AND (:dateFact ISNULL OR CAST(d.date_fact AS VARCHAR) = CAST(:dateFact AS VARCHAR)) " +
             "AND (:situation ISNULL OR CAST(d.situation AS VARCHAR) = CAST(:situation AS VARCHAR))",
             nativeQuery = true)
     public List<Denunciation> findyByParameters(@Param("categoryType") String categoryType,
