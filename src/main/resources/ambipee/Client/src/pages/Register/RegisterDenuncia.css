@@ -31,7 +31,16 @@
 .reg-denun select{
     width: 250px;
 }
-
+.reg-denun fieldset{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: auto;
+    width: fit-content;
+}
+.reg-denun fieldset input{
+    width: 250px;
+}
 .reg-denun button{
     margin-top: 25px;
 

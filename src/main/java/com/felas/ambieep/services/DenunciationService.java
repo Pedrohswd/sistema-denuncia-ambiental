@@ -34,21 +34,24 @@ public class DenunciationService {
 
     public String createDenun(DenunciationPOSTJSON denunciationJSON) {
         Denunciation denunciation = new Denunciation(denunciationJSON);
-        if(denunciation.getUser().getCpf() == null){
+        if (denunciation.getUser().getCpf() == null) {
             User user = userRepository.findByCpf("null");
             denunciation.setUser(user);
+        } else {
+            User usr = userRepository.findByCpf(denunciationJSON.user().getCpf());
+            denunciation.setUser(usr);
         }
         denunciation = denunciationRepository.save(denunciation);
         denunciation.setnProtocol(denunciation.getId() + "/" + Dates.year());
         denunciation.setDateCreated(Dates.formaterToDaS(denunciation.getDateCreated()));
-        denunciation.setDateFact(Dates.formaterToString(denunciation.getDateFact()));
+        denunciation.setDateFact(denunciation.getDateFact());
         denunciationRepository.save(denunciation);
-        return "Created protocol " + denunciation.getnProtocol();
+        return denunciation.getnProtocol();
     }
 
     public Denunciation findByProtocol(String string) {
         Denunciation denunciation = denunciationRepository.findByNProtocol(string);
-        if(denunciation != null){
+        if (denunciation != null) {
             List<Photos> photos = photosRepository.findByDenunciationId(denunciation.getId());
             denunciation.setPhotos(photos);
             denunciation.getUser().setPassword("");
@@ -96,7 +99,8 @@ public class DenunciationService {
 
         return list;
     }
-    public String updateCategoryDenun(DenunciationPUTUpJSON denunciationPUTUpJSON){
+
+    public String updateCategoryDenun(DenunciationPUTUpJSON denunciationPUTUpJSON) {
         Denunciation denunciation = findByProtocol(denunciationPUTUpJSON.nProtocol());
         denunciation.setCategory(denunciationPUTUpJSON.category());
         denunciationRepository.save(denunciation);

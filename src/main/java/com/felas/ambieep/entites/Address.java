@@ -12,11 +12,8 @@ public class Address {
     @Column(name = "id_adr")
     private Long id;
     private String street;
-    private String neighborhood;
     private State state;
     private String county;
-    private String zipCode;
-    private String pointReference;
     private double latitude;
     private double longitude;
 
@@ -27,11 +24,8 @@ public class Address {
 
     public Address(AddressJSON addressJSON) {
         this.street = addressJSON.street();
-        this.neighborhood = addressJSON.neighborhood();
         this.state = addressJSON.state();
         this.county = addressJSON.county();
-        this.zipCode = addressJSON.zipCode();
-        this.pointReference = addressJSON.pointReference();
         this.latitude = addressJSON.latitude();
         this.longitude = addressJSON.longitude();
     }
@@ -39,20 +33,14 @@ public class Address {
     public Address(Long id, String street, String neighborhood, State state, String county, String zipCode, String pointReference, double latitude, double longitude) {
         this.id = id;
         this.street = street;
-        this.neighborhood = neighborhood;
         this.state = state;
         this.county = county;
-        this.zipCode = zipCode;
-        this.pointReference = pointReference;
     }
 
     public Address(Address address) {
         this.street = address.getStreet();
-        this.neighborhood = address.getNeighborhood();
         this.state = address.getState();
         this.county = address.getCounty();
-        this.zipCode = address.getZipCode();
-        this.pointReference = address.getPointReference();
         this.latitude = address.getLatitude();
         this.longitude = address.getLongitude();
     }
@@ -73,14 +61,6 @@ public class Address {
         this.street = street;
     }
 
-    public String getNeighborhood() {
-        return neighborhood;
-    }
-
-    public void setNeighborhood(String neighborhood) {
-        this.neighborhood = neighborhood;
-    }
-
     public State getState() {
         return state;
     }
@@ -95,22 +75,6 @@ public class Address {
 
     public void setCounty(String county) {
         this.county = county;
-    }
-
-    public String getZipCode() {
-        return zipCode;
-    }
-
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
-    }
-
-    public String getPointReference() {
-        return pointReference;
-    }
-
-    public void setPointReference(String pointReference) {
-        this.pointReference = pointReference;
     }
 
     public double getLatitude() {

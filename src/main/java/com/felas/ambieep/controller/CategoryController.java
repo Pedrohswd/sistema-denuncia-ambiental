@@ -17,9 +17,9 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    @GetMapping
-    public ResponseEntity<List<Category>> listCategoryByType(@RequestBody CategoryJSON categoryJSON){
-        List<Category> listCategory = categoryService.findByType(categoryJSON);
+    @GetMapping("/list/{category}")
+    public ResponseEntity<List<Category>> listCategoryByType(@PathVariable String category){
+        List<Category> listCategory = categoryService.findByType(category);
         return ResponseEntity.ok(listCategory);
     }
 
@@ -27,4 +27,10 @@ public class CategoryController {
     public ResponseEntity<Optional<Category>> findCategory(@PathVariable Long id){
         return ResponseEntity.ok(categoryService.findById(id));
     }
+
+    @GetMapping("/description")
+    public ResponseEntity<Category> findByDescription(@RequestBody CategoryJSON categoryJSON){
+        return ResponseEntity.ok(categoryService.findByDescription(categoryJSON.description()));
+    }
+
 }
