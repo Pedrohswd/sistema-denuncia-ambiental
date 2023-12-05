@@ -16,6 +16,11 @@ function RegisterDenuncia() {
     const [estado, setEstado] = useState('');
     const [municipio, setMunicipio] = useState('');
 
+    const [image, setImage] = useState({
+        imgBase64: "",
+        nProtocol: ""
+    })
+
     const [categoryDenun, setCategoryDenun] = useState({
         id: 0,
         description: '',
@@ -36,7 +41,7 @@ function RegisterDenuncia() {
         phone: "",
     });
     const [denuncia, setDenuncia] = useState({
-        nProtocol:"",
+        nProtocol: "",
         user: {
             id: id,
             cpf: cpf
@@ -76,7 +81,7 @@ function RegisterDenuncia() {
         console.log(denuncia)
         // Envia uma requisição para a url com os dados do user
         await api.post("/api/denunciation/create", {
-            nProtocol:"",
+            nProtocol: "",
             user: {
                 id: id,
                 cpf: cpf,
@@ -84,7 +89,7 @@ function RegisterDenuncia() {
                 phone: "",
                 role: role
             },
-            photos:[],
+            photos: [],
             category: {
                 id: denuncia.category,
                 name: "",
@@ -102,13 +107,45 @@ function RegisterDenuncia() {
                 longitude: denuncia.address.longitude
             }
         }).then((response) => {
-            if(response.data){
-                denuncia.nProtocol= response.data
+            if (response.data) {
+                denuncia.nProtocol = response.data
+                image.nProtocol = response.data
                 console.log(denuncia.nProtocol)
+                imageSubmit();
             }
         }).catch((error) => {
             console.log(error);
         })
+    };
+
+    const imageSubmit = async () => {
+        // Envia uma requisição para a url com os dados do user
+        await api.post("/api/photos/insert", {
+            imgBase64: image.imgBase64,
+            nProtocol: image.nProtocol
+
+        }).then((response) => {
+            return response.data
+        }).catch((error) => {
+            console.log(error);
+        })
+    };
+
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onloadend = () => {
+                // Obtém o resultado da leitura como um data URL (base64)
+                const base64Image = reader.result;
+                setImage({ ...image, imgBase64: base64Image });
+            };
+
+            // Lê o conteúdo do arquivo como uma URL de dados (base64)
+            reader.readAsDataURL(file);
+        }
     };
 
     useEffect(() => {
@@ -441,11 +478,11 @@ function RegisterDenuncia() {
                     <label>Descrição*</label>
                     <textarea placeholder='Descreva o que está sendo denunciado' name='description' onChange={handleInput} value={denuncia.description}></textarea>
                     <label>Data do ocorrido</label>
-                    <input type='date' name='dateFact' onChange={handleInput} value={denuncia.dateFact}></input>
+                    <input type='date' required name='dateFact' onChange={handleInput} value={denuncia.dateFact}></input>
                     <label>Imagem</label>
-                    <input type='file' name='image'></input>
+                    <input type='file' required name='imgBase64' onChange={handleImageChange}></input>
                     <label>Possivel autor</label>
-                    <input type='text' name='author' onChange={handleInput} value={denuncia.author}></input>
+                    <input type='text'required placeholder='Caso não souber informe "Não identicado"' name='author' onChange={handleInput} value={denuncia.author}></input>
                     <button type='submit' onClick={handleSubmit}>Enviar Denúncia</button>
                 </form>
             </div >

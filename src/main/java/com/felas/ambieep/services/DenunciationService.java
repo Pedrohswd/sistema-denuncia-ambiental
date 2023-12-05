@@ -46,7 +46,7 @@ public class DenunciationService {
         denunciation.setDateCreated(Dates.formaterToDaS(denunciation.getDateCreated()));
         denunciation.setDateFact(denunciation.getDateFact());
         denunciationRepository.save(denunciation);
-        return "Created protocol " + denunciation.getnProtocol();
+        return denunciation.getnProtocol();
     }
 
     public Denunciation findByProtocol(String string) {
