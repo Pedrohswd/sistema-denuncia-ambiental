@@ -45,7 +45,7 @@ function RegisterUser() {
 
     const handleSubmit = async () => {
         // Envia uma requisição para a url com os dados do user
-        await api.post("http://localhost:8080/api/users/register", {
+        await api.post("api/users/register", {
             cpf: user.cpf,
             password: user.password,
             name: user.name,

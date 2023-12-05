@@ -1,15 +1,13 @@
 import './Login.css';
 import { useState, React } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaLock } from 'react-icons/fa';
-import { AiOutlineEyeInvisible } from 'react-icons/ai';
 import api from '../../api/axiosConfig';
 
 
 
 function Login() {
 
-    var accessToken, msg, permission, userName, cpf, phone = null;
+    var permission, userName, cpf, phone = null;
     const navigate = useNavigate();
     const [passwordShown, setPasswordShown] = useState(false);
     const togglePasswordVisiblity = () => {
@@ -18,7 +16,7 @@ function Login() {
     const [user, setUser] = useState({
         cpf: "",
         password: "",
-        permission: "", 
+        permission: "",
         userName: "",
         phone: ""
     });
@@ -28,32 +26,33 @@ function Login() {
     const preventSubmit = (e) => {
         e.preventDefault();
     };
-    const handleSubmit = async () => {
-            await api.post("/api/login/autenticate", {
-            cpf: user.cpf,
-            password: user.password
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-        }).then((response) => {
-            if (response.data.status === true) {
-                accessToken = response.data.cpf;
-                permission = response.data.permission;
-                userName = response.data.userName;
-                cpf = response.data.cpf;
-                phone = response.data.phone;
+        try {
+            const response = await api.post("/api/login/log", {
+                cpf: user.cpf,
+                password: user.password
+            });
 
-                localStorage.setItem('accessToken', accessToken);
-                localStorage.setItem('cpf', cpf);
-                localStorage.setItem('permission', permission);
-                localStorage.setItem('userName', userName);
-                localStorage.setItem('phone', phone);
+            // Verifica se a autenticação foi bem-sucedida
+            if (response.data) {
+                // Extraia os dados do usuário da resposta
+                const { permission, userName, cpf, phone } = response.data;
+
+                // Faça o que for necessário com os dados (por exemplo, armazenar em um estado global)
+                
+                // Redireciona para a página após o login bem-sucedido (substitua '/dashboard' pelo caminho desejado)
                 navigate('/');
             } else {
-                msg = response.data.msg;
-                if (msg === 'wrongPassword') alert('Senha incorreta. Verifique seus dados e tente novamente.');
-                if (msg === 'wrongCPF') alert('Usuário não encontrado. Verifique seus dados e tente novamente.');
+                // Exibe uma mensagem de erro ao usuário (pode ser ajustado conforme necessário)
+                console.error("Autenticação falhou");
             }
-        })
-    }; 
+        } catch (error) {
+            // Lógica para lidar com erros de requisição (por exemplo, conexão perdida, timeout, etc.)
+            console.error("Erro na requisição:", error);
+        }
+    };
 
 
     return (
@@ -65,18 +64,19 @@ function Login() {
                     <h1>AMBIEEP</h1>
                     <form method="post" className='textbox'>
                         <p>CPF:</p>
-                        <input type="text" name="cpf" required onChange={handleInput}/>
+                        <input type="text" name="cpf" required onChange={handleInput} value={user.cpf} />
                         <p>Senha:</p>
-                        <input name="password" required onChange={handleInput}/>
+                        <input name="password" required onChange={handleInput} value={user.password} />
                         <br /><br />
-                        <button className='btn_entrar' onSubmit={handleSubmit}>Entrar</button>
+                        <button className='btn_entrar'onClick={handleSubmit}>Entrar</button>
+                        
                     </form>
 
                 </div>
 
                 <div className='loginFooter'>
                     <button className='btn-c' onClick={() => navigate('/register/user')}>Criar conta</button>
-                    <button className='btn-d'onClick={() => navigate('/register/denuncia')}>Criar denuncia anonimamente</button>
+                    <button className='btn-d' onClick={() => navigate('/register/denuncias')}>Criar denuncia anonimamente</button>
                 </div>
             </div>
         </div>
