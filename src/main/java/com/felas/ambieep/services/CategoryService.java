@@ -2,7 +2,6 @@ package com.felas.ambieep.services;
 
 import com.felas.ambieep.entites.Category;
 import com.felas.ambieep.entites.enums.CategoryType;
-import com.felas.ambieep.entites.records.CategoryJSON;
 import com.felas.ambieep.repositories.CategoryRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,11 +52,22 @@ public class CategoryService {
         categoryRepository.save(category);
     }
 
-    public List<Category> findByType(CategoryJSON categoryJSON){
-        return categoryRepository.findByType(categoryJSON.categoryType());
+    public List<Category> findByType(String category) {
+        if (category.toUpperCase().equals(CategoryType.FAUNA.toString())) {
+            return categoryRepository.findByType(CategoryType.FAUNA);
+        } else if (category.toUpperCase().equals(CategoryType.FLORA.toString())) {
+            categoryRepository.findByType(CategoryType.FLORA);
+        } else if (category.toUpperCase().equals(CategoryType.POLUICAO.toString())) {
+            return categoryRepository.findByType(CategoryType.POLUICAO);
+        } else if (category.toUpperCase().equals(CategoryType.ADMINISTRACAO_AMBIENTAL.toString())) {
+            return categoryRepository.findByType(CategoryType.ADMINISTRACAO_AMBIENTAL);
+        } else if(category.toUpperCase().equals(CategoryType.ORDENAMENTO_URBANO_PATRIMONIO_CULTURAL.toString())){
+            return categoryRepository.findByType(CategoryType.ORDENAMENTO_URBANO_PATRIMONIO_CULTURAL);
+        }
+        return null;
     }
 
-    public Optional<Category> findById(Long id){
+    public Optional<Category> findById(Long id) {
         return categoryRepository.findById(id);
     }
 
